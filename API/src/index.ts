@@ -17,8 +17,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 
-app.get("/", ()=>{return "working"})
-
 // Health check endpoint
 app.get(`${API_PREFIX}/health`, (req: Request, res: Response): Response => {
     return res.status(200).json({
