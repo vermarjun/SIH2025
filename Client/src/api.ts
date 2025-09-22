@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance
 const api = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL || 'https://sih-2025-62cy.vercel.app', 
+  baseURL: import.meta.env.VITE_BACKEND_URL || 'https://sih-2025-62cy.vercel.app/api', 
   timeout: 10000, // 10 seconds timeout
 });
 
