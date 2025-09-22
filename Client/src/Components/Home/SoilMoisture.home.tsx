@@ -32,37 +32,37 @@ const Dashboard: React.FC = () => {
     lineColor: string;
     unit: string;
   }> = ({ title, data, lineColor, unit }) => (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+    <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">{title}</h3>
         <div className="flex items-center space-x-2">
-          <div className={`w-3 h-3 rounded-full ${lineColor === '#22c55e' ? 'bg-green-500' : 'bg-blue-500'}`}></div>
-          <span className="text-sm text-gray-600">{unit}</span>
+          <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${lineColor === '#22c55e' ? 'bg-green-500' : 'bg-blue-500'}`}></div>
+          <span className="text-xs sm:text-sm text-gray-600">{unit}</span>
         </div>
       </div>
       
-      <div className="h-64">
+      <div className="h-48 sm:h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <LineChart data={data} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis 
               dataKey="month" 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#64748b' }}
+              tick={{ fontSize: 10, fill: '#64748b' }}
             />
             <YAxis 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#64748b' }}
+              tick={{ fontSize: 10, fill: '#64748b' }}
             />
             <Line 
               type="monotone" 
               dataKey="value" 
               stroke={lineColor}
-              strokeWidth={3}
-              dot={{ r: 4, strokeWidth: 0, fill: lineColor }}
-              activeDot={{ r: 6, strokeWidth: 0, fill: lineColor }}
+              strokeWidth={2}
+              dot={{ r: 3, strokeWidth: 0, fill: lineColor }}
+              activeDot={{ r: 5, strokeWidth: 0, fill: lineColor }}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -71,75 +71,75 @@ const Dashboard: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-      <div className="bg-transparent flex flex-col justify-center items-center">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3">
-            <div>
-              <h1 className="text-3xl font-bold text-black text-center">
-                Soil Health <span className="text-green-600">Monitor</span>
-              </h1>
-              <p className="text-gray-600 mt-1">Real-time analysis of soil nutrient levels and agricultural conditions</p>
+        <div className="bg-transparent flex flex-col justify-center items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+            <div className="flex items-center gap-3">
+              <div>
+                <h1 className="text-xl sm:text-3xl font-bold text-black text-center">
+                  Soil Health <span className="text-green-600">Monitor</span>
+                </h1>
+                <p className="text-gray-600 mt-1 text-sm sm:text-base text-center">Real-time analysis of soil nutrient levels and agricultural conditions</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+          <div className="bg-white rounded-xl p-3 sm:p-6 shadow-sm border border-gray-100">
             <div className="flex items-center">
-              <div className="p-3 bg-green-100 rounded-lg">
-                <div className="w-6 h-6 bg-green-500 rounded"></div>
+              <div className="p-2 sm:p-3 bg-green-100 rounded-lg">
+                <div className="w-4 h-4 sm:w-6 sm:h-6 bg-green-500 rounded"></div>
               </div>
-              <div className="ml-4">
-                <p className="text-sm text-gray-600">Current Moisture</p>
-                <p className="text-2xl font-semibold text-gray-900">67%</p>
+              <div className="ml-2 sm:ml-4">
+                <p className="text-xs sm:text-sm text-gray-600">Current Moisture</p>
+                <p className="text-lg sm:text-2xl font-semibold text-gray-900">67%</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-3 sm:p-6 shadow-sm border border-gray-100">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <div className="w-6 h-6 bg-blue-500 rounded"></div>
+              <div className="p-2 sm:p-3 bg-blue-100 rounded-lg">
+                <div className="w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded"></div>
               </div>
-              <div className="ml-4">
-                <p className="text-sm text-gray-600">Temperature</p>
-                <p className="text-2xl font-semibold text-gray-900">24°C</p>
+              <div className="ml-2 sm:ml-4">
+                <p className="text-xs sm:text-sm text-gray-600">Temperature</p>
+                <p className="text-lg sm:text-2xl font-semibold text-gray-900">24°C</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-3 sm:p-6 shadow-sm border border-gray-100">
             <div className="flex items-center">
-              <div className="p-3 bg-green-100 rounded-lg">
-                <div className="w-6 h-6 bg-green-500 rounded"></div>
+              <div className="p-2 sm:p-3 bg-green-100 rounded-lg">
+                <div className="w-4 h-4 sm:w-6 sm:h-6 bg-green-500 rounded"></div>
               </div>
-              <div className="ml-4">
-                <p className="text-sm text-gray-600">Avg Moisture</p>
-                <p className="text-2xl font-semibold text-gray-900">68%</p>
+              <div className="ml-2 sm:ml-4">
+                <p className="text-xs sm:text-sm text-gray-600">Avg Moisture</p>
+                <p className="text-lg sm:text-2xl font-semibold text-gray-900">68%</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-3 sm:p-6 shadow-sm border border-gray-100">
             <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <div className="w-6 h-6 bg-blue-500 rounded"></div>
+              <div className="p-2 sm:p-3 bg-blue-100 rounded-lg">
+                <div className="w-4 h-4 sm:w-6 sm:h-6 bg-blue-500 rounded"></div>
               </div>
-              <div className="ml-4">
-                <p className="text-sm text-gray-600">Avg Temp</p>
-                <p className="text-2xl font-semibold text-gray-900">23.2°C</p>
+              <div className="ml-2 sm:ml-4">
+                <p className="text-xs sm:text-sm text-gray-600">Avg Temp</p>
+                <p className="text-lg sm:text-2xl font-semibold text-gray-900">23.2°C</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-8">
           <ChartCard
             title="Soil Moisture Trends"
             data={soilMoistureData}
@@ -156,55 +156,55 @@ const Dashboard: React.FC = () => {
         </div>
 
         {/* Additional Metrics */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">System Status</h4>
-            <div className="space-y-3">
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">System Status</h4>
+            <div className="space-y-2 sm:space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Sensors</span>
+                <span className="text-xs sm:text-sm text-gray-600">Sensors</span>
                 <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Online</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Data Sync</span>
+                <span className="text-xs sm:text-sm text-gray-600">Data Sync</span>
                 <span className="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Active</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-gray-600">Last Update</span>
-                <span className="text-gray-900 text-sm">2 min ago</span>
+                <span className="text-xs sm:text-sm text-gray-600">Last Update</span>
+                <span className="text-gray-900 text-xs sm:text-sm">2 min ago</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Alerts</h4>
-            <div className="space-y-3">
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Alerts</h4>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-start space-x-2 sm:space-x-3">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full mt-1.5 sm:mt-2"></div>
                 <div>
-                  <p className="text-sm text-gray-900">Temperature rising</p>
+                  <p className="text-xs sm:text-sm text-gray-900">Temperature rising</p>
                   <p className="text-xs text-gray-500">5 min ago</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+              <div className="flex items-start space-x-2 sm:space-x-3">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-500 rounded-full mt-1.5 sm:mt-2"></div>
                 <div>
-                  <p className="text-sm text-gray-900">Moisture levels optimal</p>
+                  <p className="text-xs sm:text-sm text-gray-900">Moisture levels optimal</p>
                   <p className="text-xs text-gray-500">1 hour ago</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h4>
-            <div className="space-y-3">
-              <button className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-sm font-medium">
+          <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Quick Actions</h4>
+            <div className="space-y-2 sm:space-y-3">
+              <button className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors text-xs sm:text-sm font-medium">
                 Export Data
               </button>
-              <button className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium">
+              <button className="w-full px-3 py-2 sm:px-4 sm:py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-xs sm:text-sm font-medium">
                 Generate Report
               </button>
-              <button className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+              <button className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors text-xs sm:text-sm font-medium">
                 Settings
               </button>
             </div>

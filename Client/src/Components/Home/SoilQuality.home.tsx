@@ -98,22 +98,22 @@ const NPKValues: React.FC = () => {
     data: ChartData[];
     color: string;
   }> = ({ title, status, currentLevel, recommended, data, color }) => (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(status)}`}>
+    <div className="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 shadow-sm">
+      <div className="flex justify-between items-start mb-3 sm:mb-4">
+        <h3 className="text-base sm:text-lg font-semibold text-gray-900">{title}</h3>
+        <span className={`px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(status)}`}>
           {status}
         </span>
       </div>
       
-      <div className="h-32 mb-4">
+      <div className="h-24 sm:h-32 mb-3 sm:mb-4">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <XAxis 
               dataKey="time" 
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#6b7280' }}
+              tick={{ fontSize: 10, fill: '#6b7280' }}
             />
             <YAxis hide />
             <Line 
@@ -127,12 +127,12 @@ const NPKValues: React.FC = () => {
         </ResponsiveContainer>
       </div>
       
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm">
+      <div className="space-y-1 sm:space-y-2">
+        <div className="flex justify-between text-xs sm:text-sm">
           <span className="text-gray-600">Current Level:</span>
           <span className="font-medium text-gray-900">{currentLevel}</span>
         </div>
-        <div className="flex justify-between text-sm">
+        <div className="flex justify-between text-xs sm:text-sm">
           <span className="text-gray-600">Recommended:</span>
           <span className="text-gray-500">{recommended}</span>
         </div>
@@ -144,7 +144,7 @@ const NPKValues: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto">
         {/* Chart Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <ChartCard
             title="Nitrogen Levels"
             status="Optimal"
@@ -173,27 +173,27 @@ const NPKValues: React.FC = () => {
 
         {/* Sensor Reading History Table */}
         <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Sensor Reading History</h2>
+          <div className="p-4 sm:p-6 border-b border-gray-200">
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Sensor Reading History</h2>
           </div>
           
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Timestamp
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Sensor Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Reading
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 py-2 sm:px-6 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Change
                   </th>
                 </tr>
@@ -201,21 +201,21 @@ const NPKValues: React.FC = () => {
               <tbody className="bg-white divide-y divide-gray-200">
                 {sensorReadings.map((reading, index) => (
                   <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                       {reading.timestamp}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
                       {reading.sensorType}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
                       {reading.reading}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(reading.status)}`}>
+                    <td className="px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap">
+                      <span className={`px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-medium ${getStatusColor(reading.status)}`}>
                         {reading.status}
                       </span>
                     </td>
-                    <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${getChangeColor(reading.change)}`}>
+                    <td className={`px-3 py-2 sm:px-6 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium ${getChangeColor(reading.change)}`}>
                       {reading.change}
                     </td>
                   </tr>
@@ -236,18 +236,18 @@ const SoilQualityDashboard = ({ user, onNavigate }: Props) => {
     <div className="min-h-screen bg-gray-50">
        {/* Header */}
       <div className="bg-transparent flex flex-col justify-center items-center">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <div className="flex items-center gap-3">
             <div>
-              <h1 className="text-3xl font-bold text-black text-center">
+              <h1 className="text-xl sm:text-3xl font-bold text-black text-center">
                 Soil Health <span className="text-green-600">Monitor</span>
               </h1>
-              <p className="text-gray-600 mt-1">Real-time analysis of soil nutrient levels and agricultural conditions</p>
+              <p className="text-gray-600 mt-1 text-sm sm:text-base text-center">Real-time analysis of soil nutrient levels and agricultural conditions</p>
             </div>
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto space-y-8 p-4 md:p-6">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 p-4 sm:p-6">
         <NPKValues/>
       </div>
     </div>

@@ -59,11 +59,11 @@ const Sidebar = ({ collapsed, onToggle, user, activeItem, onNavigate, navigate }
         </div>
 
         {/* Navigation */}
-        <div className="flex-1 overflow-auto px-4 p-4">
+        <div className={`flex-1 overflow-auto px-2 md:px-4 md:p-4 ${!collapsed? "pt-4":"pt-0"}`}>
           <nav className="space-y-6">
             {/* Menu Items Section */}
             <div className="space-y-4">
-              {collapsed && (<div className="pt-4"></div>)}
+              {collapsed && (<div className="md:pt-4"></div>)}
               {menuItems.map((item, index) => (
                 <button
                   key={index}
@@ -106,7 +106,7 @@ const Sidebar = ({ collapsed, onToggle, user, activeItem, onNavigate, navigate }
         </div>
 
         {/* User Profile */}
-        <div className="border-t border-black p-4">
+        <div className="border-t border-black md:p-4">
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}

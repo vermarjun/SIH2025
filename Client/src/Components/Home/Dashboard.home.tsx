@@ -69,12 +69,12 @@ const SensorStatus: React.FC<SensorProps> = ({ name, status }) => {
   const config = getStatusConfig(status);
 
   return (
-    <div className={`flex items-center justify-between ${config.bgColor} ${config.borderColor} border rounded-xl px-4 py-3 transition-all hover:shadow-sm`}>
-      <div className="flex items-center space-x-3">
-        <div className={`w-2 h-2 rounded-full ${config.dotColor}`}></div>
-        <span className="text-sm font-medium text-black">{name}</span>
+    <div className={`flex items-center justify-between ${config.bgColor} ${config.borderColor} border rounded-xl px-3 py-2 transition-all hover:shadow-sm`}>
+      <div className="flex items-center space-x-2">
+        <div className={`w-1.5 h-1.5 rounded-full ${config.dotColor}`}></div>
+        <span className="text-xs font-medium text-black truncate">{name}</span>
       </div>
-      <span className={`text-xs font-semibold ${config.textColor} px-2 py-1 rounded-full ${config.bgColor}`}>
+      <span className={`text-xs font-semibold ${config.textColor} px-1.5 py-0.5 rounded-full ${config.bgColor}`}>
         {status}
       </span>
     </div>
@@ -94,9 +94,9 @@ const SensorStatusHeader: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-      <h2 className="text-xl font-semibold text-black mb-6">Sensor Network Status</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+      <h2 className="text-lg sm:text-xl font-semibold text-black mb-4 sm:mb-6">Sensor Network Status</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {sensors.map((sensor, index) => (
           <SensorStatus 
             key={index}
@@ -133,7 +133,7 @@ const WeatherDashboard: React.FC = () => {
     },
   ];
 
-  const getWeatherIcon = (iconType: string, size: string = 'w-8 h-8') => {
+  const getWeatherIcon = (iconType: string, size: string = 'w-6 h-6 sm:w-8 sm:h-8') => {
     switch (iconType) {
       case 'sunny':
         return <Sun className={`${size} text-yellow-500`} />;
@@ -147,107 +147,107 @@ const WeatherDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Current Weather & Impact Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6">
         {/* Current Weather */}
-        <div className="lg:col-span-3 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl font-semibold text-black mb-6">Current Weather Conditions</h2>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <div className="bg-yellow-50 p-4 rounded-2xl">
-                <Sun className="w-12 h-12 text-yellow-500" />
+        <div className="lg:col-span-3 bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+          <h2 className="text-lg sm:text-xl font-semibold text-black mb-4 sm:mb-6">Current Weather Conditions</h2>
+          <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="bg-yellow-50 p-3 sm:p-4 rounded-2xl">
+                <Sun className="w-8 h-8 sm:w-12 sm:h-12 text-yellow-500" />
               </div>
               <div>
-                <div className="text-5xl font-bold text-black mb-1">24°C</div>
-                <div className="text-gray-600 text-lg">Sunny & Clear</div>
+                <div className="text-3xl sm:text-5xl font-bold text-black mb-1">24°C</div>
+                <div className="text-gray-600 text-sm sm:text-lg">Sunny & Clear</div>
               </div>
             </div>
-            <div className="text-right space-y-2">
-              <div className="flex items-center gap-2 text-gray-600">
-                <Droplets className="w-4 h-4" />
-                <span className="text-sm">Humidity: 65%</span>
+            <div className="text-center sm:text-right space-y-1 sm:space-y-2">
+              <div className="flex items-center gap-2 text-gray-600 justify-center sm:justify-end">
+                <Droplets className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">Humidity: 65%</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-600">
-                <span className="text-sm">Wind: 12 km/h NW</span>
+              <div className="flex items-center gap-2 text-gray-600 justify-center sm:justify-end">
+                <span className="text-xs sm:text-sm">Wind: 12 km/h NW</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-600">
-                <span className="text-sm">Pressure: 1015 hPa</span>
+              <div className="flex items-center gap-2 text-gray-600 justify-center sm:justify-end">
+                <span className="text-xs sm:text-sm">Pressure: 1015 hPa</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Agricultural Impact */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h2 className="text-xl font-semibold text-black mb-6">Crop Impact Assessment</h2>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 p-3 bg-green-50 rounded-xl">
-              <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-              <span className="text-sm text-gray-700">Optimal growing conditions</span>
+        <div className="lg:col-span-2 bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+          <h2 className="text-lg sm:text-xl font-semibold text-black mb-4 sm:mb-6">Crop Impact Assessment</h2>
+          <div className="space-y-3 sm:space-y-4">
+            <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-green-50 rounded-xl">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" />
+              <span className="text-xs sm:text-sm text-gray-700">Optimal growing conditions</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-xl">
-              <Zap className="w-5 h-5 text-blue-500 flex-shrink-0" />
-              <span className="text-sm text-gray-700">Low disease risk</span>
+            <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-blue-50 rounded-xl">
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 flex-shrink-0" />
+              <span className="text-xs sm:text-sm text-gray-700">Low disease risk</span>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl">
-              <AlertTriangle className="w-5 h-5 text-yellow-500 flex-shrink-0" />
-              <span className="text-sm text-gray-700">Monitor irrigation needs</span>
+            <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-yellow-50 rounded-xl">
+              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
+              <span className="text-xs sm:text-sm text-gray-700">Monitor irrigation needs</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* 7-Day Forecast */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <h2 className="text-xl font-semibold text-black mb-6">7-Day Weather Forecast</h2>
-        <div className="grid grid-cols-7 gap-4">
+      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+        <h2 className="text-lg sm:text-xl font-semibold text-black mb-4 sm:mb-6">7-Day Weather Forecast</h2>
+        <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 sm:gap-4">
           {forecast.map((day, index) => (
             <div
               key={index}
-              className="text-center p-4 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer border border-gray-100"
+              className="text-center p-2 sm:p-4 rounded-xl hover:bg-gray-50 transition-colors cursor-pointer border border-gray-100"
             >
-              <div className="text-sm font-medium text-gray-600 mb-3">{day.day}</div>
-              <div className="flex justify-center mb-3">
-                {getWeatherIcon(day.icon)}
+              <div className="text-xs sm:text-sm font-medium text-gray-600 mb-2 sm:mb-3">{day.day}</div>
+              <div className="flex justify-center mb-2 sm:mb-3">
+                {getWeatherIcon(day.icon, 'w-5 h-5 sm:w-6 sm:h-6')}
               </div>
-              <div className="text-lg font-bold text-black mb-1">{day.temp}</div>
-              <div className="text-xs text-gray-500">{day.condition}</div>
+              <div className="text-sm sm:text-lg font-bold text-black mb-1">{day.temp}</div>
+              <div className="text-xs text-gray-500 truncate">{day.condition}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Weather Alerts */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <h2 className="text-xl font-semibold text-black mb-6">Weather Advisories</h2>
-        <div className="space-y-4">
+      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-100">
+        <h2 className="text-lg sm:text-xl font-semibold text-black mb-4 sm:mb-6">Weather Advisories</h2>
+        <div className="space-y-3 sm:space-y-4">
           {alerts.map((alert, index) => (
             <div
               key={index}
-              className={`rounded-xl p-4 border-2 ${
+              className={`rounded-xl p-3 sm:p-4 border-2 ${
                 alert.type === 'warning'
                   ? 'bg-yellow-50 border-yellow-200'
                   : 'bg-blue-50 border-blue-200'
               }`}
             >
-              <div className="flex items-start gap-4">
-                <div className={`p-2 rounded-full ${
+              <div className="flex items-start gap-3">
+                <div className={`p-1.5 sm:p-2 rounded-full ${
                   alert.type === 'warning' ? 'bg-yellow-100' : 'bg-blue-100'
                 }`}>
                   {alert.type === 'warning' ? (
-                    <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                    <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
                   ) : (
-                    <Info className="w-5 h-5 text-blue-600" />
+                    <Info className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   )}
                 </div>
                 <div className="flex-1">
-                  <div className={`font-semibold mb-2 ${
+                  <div className={`font-semibold mb-1 text-sm sm:text-base ${
                     alert.type === 'warning' ? 'text-yellow-800' : 'text-blue-800'
                   }`}>
                     {alert.title}
                   </div>
-                  <div className={`text-sm ${
+                  <div className={`text-xs sm:text-sm ${
                     alert.type === 'warning' ? 'text-yellow-700' : 'text-blue-700'
                   }`}>
                     {alert.description}
@@ -307,19 +307,19 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, status, i
   const config = getStatusConfig();
 
   return (
-    <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-sm font-medium text-gray-600 uppercase tracking-wide">{title}</h3>
-        <div className={`${config.iconBg} p-2 rounded-xl`}>
-          <div className={config.textColor}>
-            {icon}
+    <div className="bg-white border border-gray-100 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-center justify-between mb-3 sm:mb-4">
+        <h3 className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-wide truncate">{title}</h3>
+        <div className={`${config.iconBg} p-1.5 sm:p-2 rounded-xl`}>
+          <div className={`${config.textColor} w-4 h-4 md:w-5 md:h-5`}>
+            {React.cloneElement(icon as React.ReactElement )}
           </div>
         </div>
       </div>
-      <div className="space-y-2">
-        <p className="text-3xl font-bold text-black">{value}</p>
+      <div className="space-y-1 sm:space-y-2">
+        <p className="text-xl sm:text-3xl font-bold text-black">{value}</p>
         {change && (
-          <p className="text-sm text-gray-500">{change}</p>
+          <p className="text-xs sm:text-sm text-gray-500 truncate">{change}</p>
         )}
       </div>
     </div>
@@ -328,13 +328,13 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, status, i
 
 const DashboardHeader: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
       <MetricCard
         title="Soil Moisture"
         value="67%"
         change="+2.5% from last reading"
         status="info"
-        icon={<Droplets className="w-5 h-5" />}
+        icon={<Droplets />}
       />
       
       <MetricCard
@@ -342,7 +342,7 @@ const DashboardHeader: React.FC = () => {
         value="24°C"
         change="Optimal range"
         status="good"
-        icon={<Thermometer className="w-5 h-5" />}
+        icon={<Thermometer />}
       />
       
       <MetricCard
@@ -350,7 +350,7 @@ const DashboardHeader: React.FC = () => {
         value="6.8"
         change="Within normal range"
         status="info"
-        icon={<HelpCircle className="w-5 h-5" />}
+        icon={<HelpCircle />}
       />
       
       <MetricCard
@@ -358,7 +358,7 @@ const DashboardHeader: React.FC = () => {
         value="Good"
         change="All nutrients balanced"
         status="good"
-        icon={<CheckCircle className="w-5 h-5" />}
+        icon={<CheckCircle />}
       />
     </div>
   );
@@ -370,16 +370,16 @@ const Dashboard = ({ user, onNavigate = () => {} }: Partial<Props>) => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="flex flex-col justify-center items-center bg-transparent">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <h1 className="text-3xl font-bold text-black text-center">
+        <div className="w-full max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
+          <h1 className="text-xl sm:text-3xl font-bold text-black text-center">
             Welcome back, <span className="text-green-600">{user?.username}</span>
           </h1>
-          <p className="text-gray-600 mt-2">Here's what's happening with your farm today</p>
+          <p className="text-gray-600 mt-1 sm:mt-2 text-center text-sm sm:text-base">Here's what's happening with your farm today</p>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8 space-y-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 space-y-4 sm:space-y-8 pb-6 sm:pb-8">
         <DashboardHeader />
         <SensorStatusHeader />
         <WeatherDashboard />
