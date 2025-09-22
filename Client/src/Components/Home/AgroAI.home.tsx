@@ -346,8 +346,8 @@ export default function AgroAIChat() {
         </div>
 
         {/* Input Area */}
-        <div className="p-3 sm:p-4 md:p-6 border-t border-gray-200 bg-white">
-          <div className="flex items-end space-x-2 sm:space-x-3 md:space-x-4">
+        <div className="px-2 flex flex-col w-full justify-center items-center border-t border-gray-200 bg-white h-20">
+          <div className="flex items-end space-x-2 sm:space-x-3 md:space-x-4 w-full">
             <div className="flex-1">
               <div className="flex items-center bg-gray-50 border border-gray-200 rounded-lg sm:rounded-xl md:rounded-2xl px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 md:py-3 focus-within:border-green-400 focus-within:ring-2 focus-within:ring-green-100">
                 <input
@@ -385,8 +385,8 @@ export default function AgroAIChat() {
             </div>
           </div>
           
-          <p className="text-xs text-gray-400 mt-1.5 sm:mt-2 text-center">
-            AgroAI can make mistakes. Please verify important agricultural information.
+          <p className="text-[10px] md:text-xs text-gray-400 py-1 text-center">
+            AgroAI can make mistakes. Please verify.
           </p>
         </div>
       </div>

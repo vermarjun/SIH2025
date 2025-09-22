@@ -14,8 +14,7 @@ const Main = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState("home");
   const [isLoading,] = useState(false);
-
-  // Mock user data
+  
   const user = JSON.parse(localStorage.getItem("user") || "");
   if (user.profilePhoto == "") {
     user.profilePhoto =

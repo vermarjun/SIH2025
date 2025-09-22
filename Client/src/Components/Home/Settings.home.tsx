@@ -42,27 +42,25 @@ interface PasswordData {
 }
 
 const SkeletonLoader = () => (
-  <div className="max-w-4xl mx-auto p-6 space-y-8">
+  <div className="w-full max-w-none mx-auto p-3 sm:p-4 lg:p-6 space-y-6 lg:space-y-8">
     <div className="space-y-2">
-      <div className="h-8 bg-gray-200 rounded-lg w-48 animate-pulse" />
-      <div className="h-4 bg-gray-200 rounded w-64 animate-pulse" />
+      <div className="h-6 sm:h-8 bg-gray-200 rounded-lg w-32 sm:w-48 animate-pulse" />
+      <div className="h-3 sm:h-4 bg-gray-200 rounded w-48 sm:w-64 animate-pulse" />
     </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div className="space-y-6">
       <div className="space-y-2">
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            className="h-12 bg-gray-200 rounded-lg animate-pulse"
+            className="h-10 sm:h-12 bg-gray-200 rounded-lg animate-pulse"
           />
         ))}
       </div>
-
-      <div className="md:col-span-3 space-y-6">
-        <div className="h-64 bg-gray-200 rounded-lg animate-pulse" />
-        <div className="flex gap-4">
-          <div className="h-10 bg-gray-200 rounded w-32 animate-pulse" />
-          <div className="h-10 bg-gray-200 rounded w-24 animate-pulse" />
+      <div className="space-y-4 sm:space-y-6">
+        <div className="h-48 sm:h-64 bg-gray-200 rounded-lg animate-pulse" />
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+          <div className="h-10 bg-gray-200 rounded w-full sm:w-32 animate-pulse" />
+          <div className="h-10 bg-gray-200 rounded w-full sm:w-24 animate-pulse" />
         </div>
       </div>
     </div>
@@ -216,8 +214,8 @@ const Settings: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Alert className="max-w-md bg-gray-50 border-gray-200">
+      <div className="flex items-center justify-center min-h-[400px] p-4">
+        <Alert className="max-w-md w-full bg-gray-50 border-gray-200">
           <AlertDescription className="text-gray-700">
             Failed to load user data. Please refresh the page and try again.
           </AlertDescription>
@@ -229,17 +227,17 @@ const Settings: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 bg-white shadow-sm h-16">
-        <div className="flex items-center gap-3 justify-center">
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
+      <div className="p-3 sm:p-4 border-b border-gray-200 bg-white shadow-sm">
+        <div className="flex items-center justify-center">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Settings</h1>
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="w-full max-w-none mx-auto p-3 sm:p-4 lg:p-6">
         {/* Message Alert */}
         {message && (
           <Alert
-            className={`mb-6 ${
+            className={`mb-4 sm:mb-6 ${
               message.type === "error"
                 ? "border-red-200 bg-red-50"
                 : "border-green-200 bg-green-50"
@@ -257,7 +255,7 @@ const Settings: React.FC = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setMessage(null)}
-                className="h-6 w-6 p-0 hover:bg-transparent text-gray-400 hover:text-gray-700"
+                className="h-6 w-6 p-0 hover:bg-transparent text-gray-400 hover:text-gray-700 flex-shrink-0 ml-2"
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -268,62 +266,61 @@ const Settings: React.FC = () => {
         <Tabs
           value={activeTab}
           onValueChange={setActiveTab}
-          className="space-y-6"
+          className="space-y-4 sm:space-y-6"
         >
-          <TabsList className="grid w-full max-w-md grid-cols-3 bg-white border border-gray-200 shadow-sm">
-            <TabsTrigger
-              value="profile"
-              className="text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 transition-colors"
-            >
-              <User className="h-4 w-4 mr-2" />
-              Profile
-            </TabsTrigger>
-            <TabsTrigger
-              value="password"
-              className="text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 transition-colors"
-            >
-              <Lock className="h-4 w-4 mr-2" />
-              Password
-            </TabsTrigger>
-            <TabsTrigger
-              value="danger"
-              className="text-gray-600 data-[state=active]:bg-red-50 data-[state=active]:text-red-700 data-[state=active]:border-b-2 data-[state=active]:border-red-600 transition-colors"
-            >
-              <Trash2 className="h-4 w-4 mr-2" />
-              Danger
-            </TabsTrigger>
-          </TabsList>
+          <div className="w-full overflow-x-auto">
+            <TabsList className="grid w-full min-w-[300px] max-w-md grid-cols-3 bg-white border border-gray-200 shadow-sm mx-auto">
+              <TabsTrigger
+                value="profile"
+                className="text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 transition-colors text-xs sm:text-sm px-2 sm:px-3"
+              >
+                <User className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden xs:inline">Profile</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="password"
+                className="text-gray-600 data-[state=active]:bg-blue-50 data-[state=active]:text-blue-700 data-[state=active]:border-b-2 data-[state=active]:border-blue-600 transition-colors text-xs sm:text-sm px-2 sm:px-3"
+              >
+                <Lock className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden xs:inline">Password</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="danger"
+                className="text-gray-600 data-[state=active]:bg-red-50 data-[state=active]:text-red-700 data-[state=active]:border-b-2 data-[state=active]:border-red-600 transition-colors text-xs sm:text-sm px-2 sm:px-3"
+              >
+                <Trash2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                <span className="hidden xs:inline">Danger</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <TabsContent value="profile" className="space-y-6">
+          <TabsContent value="profile" className="">
             <Card className="bg-white border border-gray-200 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-gray-900">
+              <CardHeader className="">
+                <CardTitle className="text-lg sm:text-xl text-gray-900">
                   Profile Information
                 </CardTitle>
-                <CardDescription className="text-gray-600">
-                  Update your profile details and photo
-                </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className=" space-y-4">
                 {/* Profile Photo Section */}
-                <div className="flex items-center gap-6">
-                  <div className="relative">
-                    <Avatar className="h-20 w-20 border-2 border-gray-200 shadow-sm">
+                <div className="flex items-start gap-4 sm:gap-6">
+                  <div className="relative flex-shrink-0">
+                    <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-gray-200 shadow-sm">
                       <AvatarImage src={user.profilePhoto} alt="Profile" />
-                      <AvatarFallback className="bg-gray-100 text-xl text-gray-600">
+                      <AvatarFallback className="bg-gray-100 text-lg sm:text-xl text-gray-600">
                         {user.username?.charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-2 min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="text-lg font-semibold text-gray-900">
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
                         {user.username}
                       </h3>
                       {user.plan && (
                         <Badge
                           variant="secondary"
-                          className="bg-blue-100 text-blue-700 border-blue-200"
+                          className="bg-blue-100 text-blue-700 border-blue-200 w-fit"
                         >
                           {user.plan}
                         </Badge>
@@ -333,13 +330,13 @@ const Settings: React.FC = () => {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                        className="border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 text-xs sm:text-sm px-2 sm:px-3"
                         onClick={() =>
                           document.getElementById("photo-upload")?.click()
                         }
                         disabled={loading}
                       >
-                        <Upload className="h-4 w-4 mr-2" />
+                        <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                         Upload Photo
                       </Button>
                       <input
@@ -358,12 +355,12 @@ const Settings: React.FC = () => {
                 {/* Profile Form */}
                 <form
                   onSubmit={handleProfileUpdate}
-                  className="space-y-4 max-w-md"
+                  className="space-y-4 w-full max-w-md"
                 >
                   <div className="space-y-2">
                     <Label
                       htmlFor="username"
-                      className="text-sm font-medium text-gray-700"
+                      className="text-xs sm:text-sm font-medium text-gray-700"
                     >
                       Username
                     </Label>
@@ -373,14 +370,14 @@ const Settings: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, username: e.target.value })
                       }
-                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
                       required
                     />
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor="email"
-                      className="text-sm font-medium text-gray-700"
+                      className="text-xs sm:text-sm font-medium text-gray-700"
                     >
                       Email
                     </Label>
@@ -391,14 +388,14 @@ const Settings: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base"
                       required
                     />
                   </div>
                   <div className="space-y-2">
                     <Label
                       htmlFor="bio"
-                      className="text-sm font-medium text-gray-700"
+                      className="text-xs sm:text-sm font-medium text-gray-700"
                     >
                       Bio
                     </Label>
@@ -408,16 +405,16 @@ const Settings: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, bio: e.target.value })
                       }
-                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 min-h-[80px]"
+                      className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 min-h-[80px] resize-none text-sm sm:text-base"
                       placeholder="Tell us about yourself..."
                     />
                   </div>
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
+                    className="bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto text-sm sm:text-base"
                   >
-                    <Save className="h-4 w-4 mr-2" />
+                    <Save className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                     {loading ? "Saving..." : "Save Changes"}
                   </Button>
                 </form>
@@ -427,22 +424,22 @@ const Settings: React.FC = () => {
 
           <TabsContent value="password">
             <Card className="bg-white border border-gray-200 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-gray-900">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl text-gray-900">
                   Change Password
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-sm sm:text-base text-gray-600">
                   Update your account password
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 sm:p-6">
                 <form
                   onSubmit={handlePasswordChange}
-                  className="space-y-4 max-w-md"
+                  className="space-y-4 w-full max-w-md"
                 >
                   {(["current", "new", "confirm"] as const).map((field) => (
                     <div key={field} className="space-y-2">
-                      <Label className="text-sm font-medium text-gray-700">
+                      <Label className="text-xs sm:text-sm font-medium text-gray-700">
                         {field === "current"
                           ? "Current Password"
                           : field === "new"
@@ -471,7 +468,7 @@ const Settings: React.FC = () => {
                                 : "confirmPassword"]: e.target.value,
                             })
                           }
-                          className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 pr-10"
+                          className="bg-white border-gray-300 text-gray-900 focus:border-blue-500 focus:ring-blue-500 pr-10 text-sm sm:text-base"
                           required
                           minLength={field !== "current" ? 6 : undefined}
                         />
@@ -483,9 +480,9 @@ const Settings: React.FC = () => {
                           onClick={() => togglePasswordVisibility(field)}
                         >
                           {showPasswords[field] ? (
-                            <EyeOff className="h-4 w-4" />
+                            <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" />
                           ) : (
-                            <Eye className="h-4 w-4" />
+                            <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
                           )}
                         </Button>
                       </div>
@@ -494,9 +491,9 @@ const Settings: React.FC = () => {
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm"
+                    className="bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-sm w-full sm:w-auto text-sm sm:text-base"
                   >
-                    <Lock className="h-4 w-4 mr-2" />
+                    <Lock className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                     {loading ? "Changing..." : "Change Password"}
                   </Button>
                 </form>
@@ -506,20 +503,20 @@ const Settings: React.FC = () => {
 
           <TabsContent value="danger">
             <Card className="bg-white border border-red-200 shadow-sm">
-              <CardHeader>
-                <CardTitle className="text-xl text-red-700">
+              <CardHeader className="p-4 sm:p-6">
+                <CardTitle className="text-lg sm:text-xl text-red-700">
                   Danger Zone
                 </CardTitle>
-                <CardDescription className="text-red-600">
+                <CardDescription className="text-sm sm:text-base text-red-600">
                   Irreversible and destructive actions
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="p-4 sm:p-6 space-y-4">
                 <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-red-700">
+                  <h3 className="text-base sm:text-lg font-semibold text-red-700">
                     Delete Account
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     Once you delete your account, there is no going back. Please
                     be certain. All your data will be permanently removed and
                     cannot be recovered.
@@ -527,9 +524,9 @@ const Settings: React.FC = () => {
                   <Button
                     onClick={handleDeleteAccount}
                     disabled={loading}
-                    className="bg-red-600 text-white hover:bg-red-700 transition-colors shadow-sm"
+                    className="bg-red-600 text-white hover:bg-red-700 transition-colors shadow-sm w-full sm:w-auto text-sm sm:text-base"
                   >
-                    <Trash2 className="h-4 w-4 mr-2" />
+                    <Trash2 className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                     {loading ? "Deleting..." : "Delete Account"}
                   </Button>
                 </div>

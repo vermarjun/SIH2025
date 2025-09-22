@@ -106,8 +106,8 @@ const Sidebar = ({ collapsed, onToggle, user, activeItem, onNavigate, navigate }
         </div>
 
         {/* User Profile */}
-        <div className="border-t border-black md:p-4">
-          <div className="relative">
+        <div className={`border-t border-black h-20 flex items-center justify-center ${!collapsed? "px-4 ":"px-0"}`}>
+          <div className="relative w-full">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
               className={`
