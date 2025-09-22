@@ -3,7 +3,7 @@ import React from "react";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-gray-200 flex flex-col items-center px-6 py-12">
+    <div className="min-h-screen bg-white text-black flex flex-col items-center px-6 py-12">
       <div className="max-w-3xl w-full">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Privacy Policy - Agrosmart

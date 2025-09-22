@@ -12,9 +12,6 @@ import PrivacyPolicy from '@/Pages/PrivacyPolicy.page.tsx';
 const LandingPage = lazy(() => import('../Pages/LandingPage/Main.landing.page.tsx'));
 const AuthPage = lazy(() => import('../Pages/Auth.page.tsx'));
 const HomePage = lazy(() => import('../Components/Home/Main.home.tsx'));
-const DashboardLayout = lazy(() => import('../Layouts/Dashboard.layout'));
-const ProfilePage = lazy(() => import('../Pages/ProfilePage.page'));
-const SettingsPage = lazy(() => import('../Pages/SettingsPage.page'));
 
 const router = createBrowserRouter([
 // LANDING PAGE
@@ -31,38 +28,6 @@ const router = createBrowserRouter([
         element: (
           <AuthRoute>
             <HomePage />
-          </AuthRoute>
-        ),
-      },
-    ],
-  },
-// DASHBOARD
-  {
-    path: '/dashboard/:projectId',
-    // element: <DashboardLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: (
-          <AuthRoute>
-            <DashboardLayout />
-          </AuthRoute>
-        ),
-      },
-      {
-        path: 'profile',
-        element: (
-          <AuthRoute>
-            <ProfilePage />
-          </AuthRoute>
-        ),
-      },
-      {
-        path: 'settings',
-        element: (
-          <AuthRoute>
-            <SettingsPage />
           </AuthRoute>
         ),
       },
