@@ -111,7 +111,7 @@ const NotificationDashboard: React.FC<Props> = () => {
     }
   };
 
-  const getNotificationColor = (type: string, isRead: boolean) => {
+  const getNotificationColor = (type: string ) => {
     const baseColors = {
       urgent: 'bg-red-100 text-red-800 border-red-200',
       warning: 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -313,7 +313,7 @@ const NotificationDashboard: React.FC<Props> = () => {
                   onClick={() => markAsRead(notification.id)}
                 >
                   <div className="flex gap-3 sm:gap-4">
-                    <div className={`flex-shrink-0 p-2 rounded-lg ${getNotificationColor(notification.type, notification.isRead)}`}>
+                    <div className={`flex-shrink-0 p-2 rounded-lg ${getNotificationColor(notification.type)}`}>
                       {getNotificationIcon(notification.type)}
                     </div>
                     

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Home, Settings, ChevronLeft, ChevronRight, LogOut, Droplet, Bell, MessageCircle, Activity, Sun } from 'lucide-react';
+import { Home, Settings, ChevronLeft, ChevronRight, LogOut, Bell, MessageCircle, Activity, Sun } from 'lucide-react';
 import type { User } from '@/State/Types';
 import type { NavigateFunction } from 'react-router-dom';
 

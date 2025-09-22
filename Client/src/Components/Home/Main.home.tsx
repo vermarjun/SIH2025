@@ -13,7 +13,7 @@ import SoilMoistureTemperature from "./SoilMoisture.home";
 const Main = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState("home");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading,] = useState(false);
 
   // Mock user data
   const user = JSON.parse(localStorage.getItem("user") || "");
