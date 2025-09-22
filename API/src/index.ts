@@ -32,7 +32,6 @@ app.listen(PORT, async ()=>{
     try {
         await connectDB();
         console.log(`Server running on port ${PORT}`);
-        console.log(`Socket.IO server is ready for connections`);
     } catch (error) {
         console.error('Failed to connect to database:', error);
     }
