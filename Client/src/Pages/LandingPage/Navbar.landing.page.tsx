@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { ShineBorder } from '@/Components/magicui/shine-border';
 import { useNavigate } from 'react-router-dom';
-import logo from "/logo.png"
 
 const GlassyNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,7 +44,7 @@ const GlassyNavbar = () => {
           <div className="flex items-center justify-between">
             {/* Logo on extreme left */}
             <div className="flex items-center">
-              <img src={logo} alt="Logo" className="h-10 w-auto" />
+              <img src="https://res.cloudinary.com/dkzeey5iq/image/upload/v1758645150/WhatsApp_Image_2025-09-22_at_08.46.43-removebg-preview_mrdhry.png" alt="Logo" className="h-10 w-auto" />
             </div>
 
             {/* Navigation buttons */}

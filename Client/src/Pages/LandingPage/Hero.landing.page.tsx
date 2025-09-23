@@ -82,14 +82,14 @@ const ImageCard: React.FC<ImageCardProps> = ({ images }) => {
     >
       {/* Left Card */}
       <Card
-        className="absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
+        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
         style={cardStyle(leftCardTransform)}
       >
         <CardContent className="p-0 w-full h-full">
           <img
             src={
               images[0] ||
-              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=420&fit=crop"
+              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg"
             }
             alt="left"
             className="object-cover w-full h-full"
@@ -100,7 +100,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ images }) => {
 
       {/* Center Card */}
       <Card
-        className="absolute left-1/2 -translate-x-1/2 shadow-3xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[180px] sm:h-[360px] md:h-[420px] lg:h-[450px] origin-center"
+        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-3xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[180px] sm:h-[360px] md:h-[420px] lg:h-[450px] origin-center"
         style={cardStyle(centerCardTransform)}
       >
         <CardContent className="p-0 w-full h-full">
@@ -118,7 +118,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ images }) => {
 
       {/* Right Card */}
       <Card
-        className="absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
+        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
         style={cardStyle(rightCardTransform)}
       >
         <CardContent className="p-0 w-full h-full">
@@ -144,29 +144,34 @@ interface UserRatingCardProps {
 const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
   const avatars = [
     {
-      src: "https://github.com/shadcn.png",
-      alt: "@shadcn",
-      fallback: "CN",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.04.38_m3ihhc.jpg",
+      alt: "@nextjs",
+      fallback: "N",
     },
     {
-      src: "https://github.com/leerob.png",
-      alt: "@leerob",
-      fallback: "LR",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644634/WhatsApp_Image_2025-09-23_at_21.53.11_l76uxt.jpg",
+      alt: "@nextjs",
+      fallback: "N",
     },
     {
-      src: "https://github.com/evilrabbit.png",
-      alt: "@evilrabbit",
-      fallback: "ER",
-    },
-    {
-      src: "https://github.com/vercel.png",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.34.36_ltaqz1.jpg",
       alt: "@vercel",
       fallback: "V",
     },
     {
-      src: "https://github.com/nextjs.png",
-      alt: "@nextjs",
-      fallback: "N",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.19.27_pn4taz.jpg",
+      alt: "@evilrabbit",
+      fallback: "ER",
+    },
+    {
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.52.37_bmf62k.jpg",
+      alt: "@leerob",
+      fallback: "LR",
+    },
+    {
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.40.52_sfvxvo.jpg",
+      alt: "@shadcn",
+      fallback: "CN",
     },
   ];
 
@@ -200,7 +205,7 @@ const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
       <div className="flex -space-x-4">
         {avatars.map((avatar, index) => (
           <Avatar key={index} className="w-12 h-12 border-2 border-neutral-300">
-            <AvatarImage loading="lazy" src={avatar.src} alt={avatar.alt} />
+            <AvatarImage className="object-contain" loading="lazy" src={avatar.src} alt={avatar.alt} />
             <AvatarFallback className="bg-neutral-300 text-gray-200">
               {avatar.fallback}
             </AvatarFallback>
@@ -258,8 +263,7 @@ const HeroSection: React.FC = () => {
             <br /> of Precision Farming.
           </h1>
           <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 max-w-3xl mx-auto mb-10 leading-relaxed">
-            Smart farming for a smarter future. Lorem ipsum something should
-            come here, our tag line brand line will add later
+            We bring smart irrigation, crop health monitoring, and real time insights together in one system
           </p>
           <div onClick={() => navigate("/home")} className="w-full flex flex-col justify-center items-center -mb-1 -z-20">
             <ShimmerButton className="rounded-full md:px-14 px-7 py-4 text-base font-mediumm mb-10 bg-green-600">
@@ -271,7 +275,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Bottom Section */}
-      <div className="bg-black text-white py-16 px-6 text-center">
+      <div className="bg-black text-white md:py-16 py-8 px-6 text-center">
         <h2 className="text-2xl md:text-6xl font-semibold max-w-full mx-auto mb-6">
           We drive transformation through innovative technology and operational
           excellence,
@@ -283,9 +287,9 @@ const HeroSection: React.FC = () => {
         <div className="flex justify-center items-centers bg-black">
           <ImageCard
             images={[
-              "https://picsum.photos/id/237/400/500", // left
-              "https://picsum.photos/id/238/400/500", // center
-              "https://picsum.photos/id/239/400/500", // right
+              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642696/IMG_8559_uyzkhr.jpg", // left
+              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642702/IMG-20250201-WA0047_wlaizu.jpg", // center
+              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg", // right
             ]}
           />
         </div>

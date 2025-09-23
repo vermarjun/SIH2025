@@ -5,15 +5,15 @@ const images = [
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.41_tarcwt.jpg",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484207/WhatsApp_Image_2025-09-22_at_00.30.40_kdvh2h.jpg",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.41_tarcwt.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484207/WhatsApp_Image_2025-09-22_at_00.30.40_kdvh2h.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642702/IMG-20250201-WA0047_wlaizu.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642697/IMG_8561_ppxlul.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758643986/Soil-NPK-Sensor-with-arduino-and-oled-display-display-nitrogen-phosphorus-and-potassium-on-oled-display-copy_aydwxk.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644208/1_GV3v-fXxrJbRbPpNZ_rF7A_ijrwsz.png",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.41_tarcwt.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484207/WhatsApp_Image_2025-09-22_at_00.30.40_kdvh2h.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.41_tarcwt.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484207/WhatsApp_Image_2025-09-22_at_00.30.40_kdvh2h.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0016_hzrogq.jpg",
 ];
 
 const firstRow = images.slice(0, 4);

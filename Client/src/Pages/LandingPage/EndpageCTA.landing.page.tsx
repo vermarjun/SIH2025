@@ -19,9 +19,7 @@ export default function EndPageCTA({
   ),
   subtitle = (
     <>
-      Join thousands of farmers, traders, and suppliers using our platform to
-      digitize their operations, reach more buyers, and increase profits — all
-      in one place.
+      We bring smart irrigation, crop health monitoring, and real time insights in one system, using AI and IoT to create a practical, scalable solution for farmers
     </>
   ),
   ctaText = "Get Free Consultation",
@@ -67,7 +65,7 @@ export default function EndPageCTA({
           {title}
         </h2>
 
-        <p className="mt-5 text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto bg-white/10 backdrop-blur-2xl rounded-full p-2">
+        <p className="mt-5 p-4 text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto bg-white/10 backdrop-blur-2xl rounded-full">
           {subtitle}
         </p>
 

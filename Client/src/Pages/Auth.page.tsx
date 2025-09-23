@@ -6,7 +6,6 @@ import { toast } from 'sonner';
 import type { User } from '@/State/Types';
 import { FlickeringGrid } from '@/Components/ui/flickering-grid';
 
-
 // Define types
 interface FormData {
   name: string;
@@ -59,7 +58,7 @@ const AuthPage: React.FC = () => {
     const rect = formRef.current.getBoundingClientRect();
     const particles: DustParticle[] = [];
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) { // Reduced from 20 to 15
     // Determine which edge to emit from
     const edge = Math.floor(Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
       let startX: number, startY: number;
@@ -86,17 +85,17 @@ const AuthPage: React.FC = () => {
           startY = 0;
       }
       
-      // Add some randomness to initial position
-      startX += (Math.random() - 0.5) * 20;
-      startY += (Math.random() - 0.5) * 20;
+      // Reduced randomness for smaller card
+      startX += (Math.random() - 0.5) * 15;
+      startY += (Math.random() - 0.5) * 15;
       
       particles.push({
         id: i,
         x: startX,
         y: startY,
-        vx: (Math.random() - 0.5) * 8,
-        vy: (Math.random() - 0.5) * 8,
-        size: Math.random() * 4 + 2,
+        vx: (Math.random() - 0.5) * 6, // Reduced velocity
+        vy: (Math.random() - 0.5) * 6, // Reduced velocity
+        size: Math.random() * 3 + 1.5, // Slightly smaller particles
         opacity: Math.random() * 0.6 + 0.4,
         delay: Math.random() * 200,
         color: Math.random() > 0.7 ? '#3b82f6' : '#ffffff',
@@ -131,7 +130,6 @@ const AuthPage: React.FC = () => {
       });
       
       const { token, user } = response.data;
-
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       toast.success('Welcome back!');
@@ -154,7 +152,6 @@ const AuthPage: React.FC = () => {
       const { token, user } = loginResponse.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-
       toast.success('Registered Successfully!');
       navigate('/home'); 
     }
@@ -189,7 +186,7 @@ const AuthPage: React.FC = () => {
   };
 
   const GoogleIcon: React.FC = () => (
-    <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
       <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
       <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
@@ -210,25 +207,26 @@ const AuthPage: React.FC = () => {
           flickerChance={0.1}
         />
       </div>
+
       {/* Main auth card */}
-      <div className="relative w-full max-w-md z-10">
+      <div className="relative w-full max-w-sm z-10 px-4"> {/* Changed from max-w-md to max-w-sm */}
         <div className={`relative transition-all duration-500 ease-out ${
           isAnimating ? 'scale-105' : 'scale-100'
         }`}>
           {/* Card */}
-          <div className="relative bg-gray-950 border border-gray-800 rounded-2xl md:p-8 p-6 shadow-2xl shadow-black/50 overflow-hidden">
+          <div className="relative bg-gray-950 border border-gray-800 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50 overflow-hidden"> {/* Reduced padding */}
             {/* Header */}
-            <div className="text-center md:mb-8 mb-4">
-              <h1 className="text-2xl font-semibold text-white mb-1 tracking-tight">
+            <div className="text-center mb-5 md:mb-6"> {/* Reduced margin */}
+              <h1 className="text-xl md:text-2xl font-semibold text-white mb-1 tracking-tight"> {/* Smaller text on mobile */}
                 {isLogin ? 'Welcome back' : 'Create your account'}
               </h1>
-              <p className="text-gray-400 text-sm font-light">
+              <p className="text-gray-400 text-xs md:text-sm font-light"> {/* Smaller text */}
                 {isLogin ? 'Sign in to continue to your account' : 'Get started with your free account'}
               </p>
             </div>
 
             {/* Auth mode toggle */}
-            <div className="relative md:mb-8 mb-4">
+            <div className="relative mb-5 md:mb-6"> {/* Reduced margin */}
               <div className="bg-gray-900 rounded-xl p-1 flex relative border border-gray-800">
                 <div
                   className={`absolute top-1 bottom-1 w-1/2 bg-white rounded-lg transition-all duration-300 ease-out ${
@@ -238,7 +236,7 @@ const AuthPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => !isLogin && toggleAuthMode()}
-                  className={`relative z-10 flex-1 py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 ${
+                  className={`relative z-10 flex-1 py-2 px-3 text-xs md:text-sm font-medium rounded-lg transition-all duration-300 ${
                     isLogin 
                       ? 'text-black' 
                       : 'text-gray-400 hover:text-gray-200'
@@ -249,7 +247,7 @@ const AuthPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => isLogin && toggleAuthMode()}
-                  className={`relative z-10 flex-1 py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 ${
+                  className={`relative z-10 flex-1 py-2 px-3 text-xs md:text-sm font-medium rounded-lg transition-all duration-300 ${
                     !isLogin 
                       ? 'text-black' 
                       : 'text-gray-400 hover:text-gray-200'
@@ -263,17 +261,16 @@ const AuthPage: React.FC = () => {
             {/* Google Auth Button */}
             <button 
               type="button"
-              className="w-full md:mb-6 mb-2 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white py-3 px-4 rounded-xl flex items-center justify-center gap-3 transition-all duration-300 hover:border-gray-700 group font-medium"
-            >
+              className="w-full mb-4 md:mb-5 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:border-gray-700 group font-medium text-sm md:text-base"> {/* Reduced padding and gap */}
               <GoogleIcon />
               <span>Continue with Google</span>
             </button>
 
             {/* Improved divider */}
-            <div className="relative md:my-6 my-4 flex items-center">
+            <div className="relative my-4 md:my-5 flex items-center"> {/* Reduced margin */}
               <div className="flex-grow border-t border-gray-800" />
-              <div className="relative flex-shrink-0 px-4">
-                <div className="bg-black px-3 py-1 rounded-full border border-gray-800">
+              <div className="relative flex-shrink-0 px-3"> {/* Reduced padding */}
+                <div className="bg-black px-2 py-1 rounded-full border border-gray-800"> {/* Reduced padding */}
                   <span className="text-xs text-gray-500 font-light tracking-wide">OR</span>
                 </div>
               </div>
@@ -299,13 +296,13 @@ const AuthPage: React.FC = () => {
                 />
               ))}
               
-              <div ref={formRef} className="md:space-y-4 space-y-2">
+              <div ref={formRef} className="space-y-3 md:space-y-4"> {/* Reduced spacing */}
                 {/* Name field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-20 opacity-100 translate-y-0'
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
                 }`}>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"> {/* Reduced padding */}
                       <User2Icon className="h-4 w-4 text-gray-500" />
                     </div>
                     <input
@@ -313,18 +310,18 @@ const AuthPage: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light"
+                      className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm" /* Reduced padding and text size */
                       placeholder="Full name"
                     />
                   </div>
                 </div>
 
-                {/* Roueter ID field */}
+                {/* Router ID field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-20 opacity-100 translate-y-0'
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
                 }`}>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <User2Icon className="h-4 w-4 text-gray-500" />
                     </div>
                     <input
@@ -332,7 +329,7 @@ const AuthPage: React.FC = () => {
                       name="routerId"
                       value={formData.routerId}
                       onChange={handleInputChange}
-                      className="w-full pl-11 pr-4 py-3 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light"
+                      className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                       placeholder="Router Id from home router"
                     />
                   </div>
@@ -340,7 +337,7 @@ const AuthPage: React.FC = () => {
 
                 {/* Email field */}
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail className="h-4 w-4 text-gray-500" />
                   </div>
                   <input
@@ -348,7 +345,7 @@ const AuthPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-11 pr-4 py-3 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light"
+                    className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                     placeholder="Email address"
                     required
                   />
@@ -356,7 +353,7 @@ const AuthPage: React.FC = () => {
 
                 {/* Password field */}
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Lock className="h-4 w-4 text-gray-500" />
                   </div>
                   <input
@@ -364,14 +361,14 @@ const AuthPage: React.FC = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-11 pr-12 py-3 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light"
+                    className="w-full pl-10 pr-11 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                     placeholder="Password"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
@@ -379,10 +376,10 @@ const AuthPage: React.FC = () => {
 
                 {/* Confirm Password field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-20 opacity-100 translate-y-0'
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
                 }`}>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <Lock className="h-4 w-4 text-gray-500" />
                     </div>
                     <input
@@ -390,13 +387,13 @@ const AuthPage: React.FC = () => {
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="w-full pl-11 pr-12 py-3 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light"
+                      className="w-full pl-10 pr-11 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                       placeholder="Confirm password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -405,9 +402,9 @@ const AuthPage: React.FC = () => {
 
                 {/* Login options */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  !isLogin ? 'max-h-0 opacity-0' : 'max-h-20 opacity-100'
+                  !isLogin ? 'max-h-0 opacity-0' : 'max-h-16 opacity-100'
                 }`}>
-                  <div className="flex items-center justify-between text-sm pt-2">
+                  <div className="flex items-center justify-between text-xs pt-2"> {/* Smaller text */}
                     <label className="flex items-center text-gray-400 cursor-pointer group">
                       <input 
                         type="checkbox" 
@@ -425,21 +422,19 @@ const AuthPage: React.FC = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="pt-6">
+                <div className="pt-4 md:pt-5"> {/* Reduced padding */}
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    disabled={isLoading} // Disable button when loading
-                    className="w-full bg-white hover:bg-gray-100 text-black font-medium py-3 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-white/20 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    disabled={isLoading}
+                    className="w-full bg-white hover:bg-gray-100 text-black font-medium py-2.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-white/20 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm" /* Reduced padding and text size */
                   >
                     <span className="flex items-center justify-center gap-2">
                       {isLoading ? (
-                        // Loader spinner
                         <div className="flex items-center justify-center">
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-black"></div>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div> {/* Smaller spinner */}
                         </div>
                       ) : (
-                        // Normal button content
                         <>
                           <span>{isLogin ? 'Sign in' : 'Create account'}</span>
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
@@ -452,7 +447,7 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <div className="mt-8 text-center text-sm text-gray-500">
+            <div className="mt-5 md:mt-6 text-center text-xs md:text-sm text-gray-500"> {/* Reduced margin and text size */}
               <span>
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
@@ -476,7 +471,7 @@ const AuthPage: React.FC = () => {
           }
           100% {
             opacity: 0;
-            transform: translate(${Math.random() > 0.5 ? '' : '-'}${20 + Math.random() * 30}px, ${Math.random() > 0.5 ? '' : '-'}${20 + Math.random() * 30}px) scale(0.1) rotate(${Math.random() * 360}deg);
+            transform: translate(${Math.random() > 0.5 ? '' : '-'}${15 + Math.random() * 20}px, ${Math.random() > 0.5 ? '' : '-'}${15 + Math.random() * 20}px) scale(0.1) rotate(${Math.random() * 360}deg);
           }
         }
       `}</style>
