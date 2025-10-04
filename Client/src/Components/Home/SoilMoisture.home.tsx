@@ -134,7 +134,7 @@ const Dashboard: React.FC = () => {
 
   // Gauge Component
   const GaugeChart: React.FC<{ value: number; title: string; unit: string; color: string }> = ({ 
-    value, title, unit, color 
+    value, unit, color 
   }) => {
     const radius = 80;
     const strokeWidth = 12;
@@ -178,7 +178,7 @@ const Dashboard: React.FC = () => {
 
   // Big Number Component
   const BigNumber: React.FC<{ value: number; unit: string; title: string }> = ({ 
-    value, unit, title 
+    value, unit
   }) => (
     <div className="flex flex-col items-center justify-center h-full">
       <div className="text-6xl font-bold text-gray-900 mb-2">
