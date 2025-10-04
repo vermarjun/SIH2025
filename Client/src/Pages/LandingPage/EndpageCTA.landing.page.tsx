@@ -12,7 +12,7 @@ export default function EndPageCTA({
   imageSrc = "https://amazingfoodanddrink.com/wp-content/uploads/2024/05/The-Importance-of-Organic-Farming-in-Ireland_-259036356.jpg",
   title = (
     <>
-      Ready to Make you
+      Ready to Make your
       <br />
       Farm Smart?
     </>
@@ -22,7 +22,7 @@ export default function EndPageCTA({
       We bring smart irrigation, crop health monitoring, and real time insights in one system, using AI and IoT to create a practical, scalable solution for farmers
     </>
   ),
-  ctaText = "Get Free Consultation",
+  ctaText = "Book Free Trial",
 }: EndPageCTAProps) {
   return (
     <section className="relative w-full min-h-[68vh] lg:min-h-[76vh] flex items-center justify-center bg-white">

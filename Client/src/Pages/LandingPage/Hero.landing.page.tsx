@@ -3,137 +3,147 @@ import { ShimmerButton } from "@/Components/magicui/shimmer-button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/Components/ui/avatar";
 import { StarHalf, Star } from "lucide-react";
 import { LineShadowText } from "@/Components/ui/line-shadow-text";
-import { Card, CardContent } from "@/Components/ui/card";
 import { useEffect, useRef, useState } from "react";
+import { useScroll, useTransform } from "framer-motion";
 import ProductOfTheDay from "/ProductOfTheDay.png";
 import { useNavigate } from "react-router-dom";
-interface ImageCardProps {
-  images: string[];
-}
+import { motion, MotionValue } from "framer-motion";
 
-const ImageCard: React.FC<ImageCardProps> = ({ images }) => {
+export const Header = ({ translate, titleComponent }: any) => {
+  return (
+    <motion.div
+      style={{
+        translateY: translate,
+      }}
+      className="div text-center"
+    >
+      {titleComponent}
+    </motion.div>
+  );
+};
+
+export const VideoCard = ({
+  rotate,
+  scale,
+  children,
+}: {
+  rotate: MotionValue<number>;
+  scale: MotionValue<number>;
+  translate: MotionValue<number>;
+  children: React.ReactNode;
+}) => {
+  return (
+    <motion.div
+      style={{
+        rotateX: rotate,
+        scale,
+        boxShadow:
+          "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
+      }}
+      className="md:w-full w-screen bg-[#222222] rounded-[30px] shadow-2xl"
+    >
+      <div className="h-full md:w-full w-screen overflow-hidden rounded-2xl dark:bg-zinc-900 md:rounded-2xl md:p-4">
+        {children}
+      </div>
+    </motion.div>
+  );
+};
+
+// Container Scroll Components
+export const ContainerScroll = ({
+  titleComponent,
+  children,
+}: {
+  titleComponent: string | React.ReactNode;
+  children: React.ReactNode;
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+  });
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const containerHeight = rect.height;
-      // Calculate when the container is in the center of the viewport
-      const containerCenter = rect.top + containerHeight / 2;
-      const viewportCenter = windowHeight / 2;
-      // Distance from viewport center (-windowHeight/2 to windowHeight/2)
-      const distanceFromCenter = containerCenter - viewportCenter;
-      // Convert to progress (0 to 1, where 1 is fully animated)
-      const maxDistance = windowHeight * 0.6; // Animation completes when container is 60% of viewport height from center
-      const progress = Math.max(
-        0,
-        Math.min(1, 1 - Math.abs(distanceFromCenter) / maxDistance)
-      );
-      setScrollProgress(progress);
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial calculation
-    return () => window.removeEventListener("scroll", handleScroll);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
 
-  // Easing function for smooth animation
-  const easeOutCubic = (t: number): number => {
-    return 1 - Math.pow(1 - t, 3);
+  const scaleDimensions = () => {
+    return isMobile ? [0.7, 0.9] : [1.05, 1];
   };
 
-  const animatedProgress = easeOutCubic(scrollProgress);
-
-  // Calculate transforms based on scroll progress
-  const leftCardTransform = {
-    x: -110 * animatedProgress, // Starts at 0, moves to -165%
-    rotation: -8 * animatedProgress, // Starts at 0, rotates to -8deg
-    scale: 0.95 + 0.05 * animatedProgress, // Starts smaller, scales to full size
-    zIndex: 1,
-  };
-
-  const centerCardTransform = {
-    x: 0,
-    rotation: 0,
-    scale: 0.95 + 0.05 * animatedProgress,
-    zIndex: 10,
-  };
-
-  const rightCardTransform = {
-    x: 110 * animatedProgress, // Starts at 0, moves to 65%
-    rotation: 8 * animatedProgress, // Starts at 0, rotates to 8deg
-    scale: 0.95 + 0.05 * animatedProgress,
-    zIndex: 1,
-  };
-
-  const cardStyle = (transform: any) => ({
-    transform: `translateX(${transform.x}%) rotate(${transform.rotation}deg) scale(${transform.scale})`,
-    zIndex: transform.zIndex,
-    transition: "none", // We handle animation via scroll
-  });
+  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <div
+      className="flex items-center justify-center relative"
       ref={containerRef}
-      className="relative flex items-center justify-center w-full h-[200px] md:h-[500px] overflow-hidden px-4 sm:px-8"
     >
-      {/* Left Card */}
-      <Card
-        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
-        style={cardStyle(leftCardTransform)}
+      <div
+        className="md:w-full w-screen relative"
+        style={{
+          perspective: "1000px",
+        }}
       >
-        <CardContent className="p-0 w-full h-full">
-          <img
-            src={
-              images[0] ||
-              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg"
-            }
-            alt="left"
-            className="object-cover w-full h-full"
-            loading="lazy"
-          />
-        </CardContent>
-      </Card>
-
-      {/* Center Card */}
-      <Card
-        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-3xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[180px] sm:h-[360px] md:h-[420px] lg:h-[450px] origin-center"
-        style={cardStyle(centerCardTransform)}
-      >
-        <CardContent className="p-0 w-full h-full">
-          <img
-            src={
-              images[1] ||
-              "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=400&h=450&fit=crop"
-            }
-            alt="center"
-            className="object-cover w-full h-full"
-            loading="lazy"
-          />
-        </CardContent>
-      </Card>
-
-      {/* Right Card */}
-      <Card
-        className="p-0 absolute left-1/2 -translate-x-1/2 shadow-2xl overflow-hidden rounded-xl sm:rounded-2xl w-[100px] sm:w-[280px] md:w-[350px] lg:w-[400px] h-[160px] sm:h-[340px] md:h-[390px] lg:h-[420px] origin-center"
-        style={cardStyle(rightCardTransform)}
-      >
-        <CardContent className="p-0 w-full h-full">
-          <img
-            src={
-              images[2] ||
-              "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=420&fit=crop"
-            }
-            alt="right"
-            className="object-cover w-full h-full"
-            loading="lazy"
-          />
-        </CardContent>
-      </Card>
+        <Header translate={translate} titleComponent={titleComponent} />
+        <VideoCard rotate={rotate} translate={translate} scale={scale}>
+          {children}
+        </VideoCard>
+      </div>
     </div>
+  );
+};
+
+const VideoElement: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isVisible) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isVisible]);
+
+  return (
+    <video
+      ref={videoRef}
+      muted
+      playsInline
+      loop
+      preload="none"
+      poster="https://dummyimage.com/400x300/1a1a1a/ffffff&text=Loading..."
+      className="w-full h-full object-cover rounded-2xl aspect-video"
+    >
+      <source
+        src="https://res.cloudinary.com/dloh4tkp5/video/upload/v1759602464/videoplayback_wyclji.webm"
+        type="video/webm"
+      />
+      <source
+        src="https://res.cloudinary.com/dloh4tkp5/video/upload/v1759602464/videoplayback_wyclji.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
   );
 };
 
@@ -144,32 +154,32 @@ interface UserRatingCardProps {
 const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
   const avatars = [
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.04.38_m3ihhc.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644633/WhatsApp_Image_2025-09-23_at_21.04.38_m3ihhc.webp",
       alt: "@nextjs",
       fallback: "N",
     },
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644634/WhatsApp_Image_2025-09-23_at_21.53.11_l76uxt.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644634/WhatsApp_Image_2025-09-23_at_21.53.11_l76uxt.webp",
       alt: "@nextjs",
       fallback: "N",
     },
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.34.36_ltaqz1.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644633/WhatsApp_Image_2025-09-23_at_21.34.36_ltaqz1.webp",
       alt: "@vercel",
       fallback: "V",
     },
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.19.27_pn4taz.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644633/WhatsApp_Image_2025-09-23_at_21.19.27_pn4taz.webp",
       alt: "@evilrabbit",
       fallback: "ER",
     },
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.52.37_bmf62k.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644633/WhatsApp_Image_2025-09-23_at_21.52.37_bmf62k.webp",
       alt: "@leerob",
       fallback: "LR",
     },
     {
-      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644633/WhatsApp_Image_2025-09-23_at_21.40.52_sfvxvo.jpg",
+      src: "https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758644633/WhatsApp_Image_2025-09-23_at_21.40.52_sfvxvo.webp",
       alt: "@shadcn",
       fallback: "CN",
     },
@@ -199,13 +209,18 @@ const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`md:flex md:bg-white/10 md:backdrop-blur-xl md:p-2 md:rounded-full items-center gap-2 rounded-lg ${className}`}
+      className={`md:flex md:bg-white/10 md:backdrop-blur-xl md:p-2 md:rounded-full items-center gap-2 rounded-lg mb-6 ${className}`}
     >
       {/* Overlapping Avatars */}
       <div className="flex -space-x-4">
         {avatars.map((avatar, index) => (
           <Avatar key={index} className="w-12 h-12 border-2 border-neutral-300">
-            <AvatarImage className="object-contain" loading="lazy" src={avatar.src} alt={avatar.alt} />
+            <AvatarImage
+              className="object-cover"
+              loading="lazy"
+              src={avatar.src}
+              alt={avatar.alt}
+            />
             <AvatarFallback className="bg-neutral-300 text-gray-200">
               {avatar.fallback}
             </AvatarFallback>
@@ -230,69 +245,66 @@ const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
 const HeroSection: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <section className="w-full bg-white">
-      {/* Top Section with Full Screen Height */}
-      <div className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20 pb-16">
-        {/* Background Image with Gradient Overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://res.cloudinary.com/dkzeey5iq/image/upload/v1758490233/img_0008jpg_me9jp0.webp"
-            alt="Farm Landscape"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/70 to-black/20"></div>
-        </div>
-        {/* Content with Higher Z-index */}
-        <div className="relative z-10 max-w-4xl text-center justify-center items-center">
-          <div className="flex justify-center items-center">
-            <img
-              loading="lazy"
-              src={ProductOfTheDay}
-              alt=""
-              className="max-h-26"
-            />
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-6 text-gray-800 leading-tight">
-            Building The{" "}
-            <LineShadowText
-              className="italic text-green-800"
-              shadowColor={"black"}
-            >
-              FUTURE
-            </LineShadowText>
-            <br /> of Precision Farming.
-          </h1>
-          <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 max-w-3xl mx-auto mb-10 leading-relaxed">
-            We bring smart irrigation, crop health monitoring, and real time insights together in one system
-          </p>
-          <div onClick={() => navigate("/home")} className="w-full flex flex-col justify-center items-center -mb-1 -z-20">
-            <ShimmerButton className="rounded-full md:px-14 px-7 py-4 text-base font-mediumm mb-10 bg-green-600">
-              Get Started Now!
-            </ShimmerButton>
-            <UserRatingCard />
-          </div>
-        </div>
+    <section
+      id="home"
+      className="relative w-full h-full z-10 md:px-4 rounded-b-2xl"
+    >
+      <div className="absolute inset-0 z-0 md:h-9/12 h-screen">
+        <img
+          src="https://res.cloudinary.com/dkzeey5iq/image/upload/f_auto,q_auto/v1758490233/img_0008jpg_me9jp0.webp"
+          alt="Farm Landscape"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/50 to-black/20"></div>
       </div>
-
-      {/* Bottom Section */}
-      <div className="bg-black text-white md:py-16 py-8 px-6 text-center">
-        <h2 className="text-2xl md:text-6xl font-semibold max-w-full mx-auto mb-6">
-          We drive transformation through innovative technology and operational
-          excellence,
-        </h2>
-        <p className="text-lg md:text-4xl text-gray-300 max-w-5xl mx-auto mb-10">
-          ensuring profitable and sustainable solutions for farmers!
-        </p>
-
-        <div className="flex justify-center items-centers bg-black">
-          <ImageCard
-            images={[
-              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642696/IMG_8559_uyzkhr.jpg", // left
-              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642702/IMG-20250201-WA0047_wlaizu.jpg", // center
-              "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg", // right
-            ]}
-          />
-        </div>
+      <div className="pt-20 px-12">
+        {/* Container Scroll Section */}
+        <ContainerScroll
+          titleComponent={
+            <>
+              <div className="rrelative text-center justify-center items-center">
+                <div className="flex justify-center items-center">
+                  <img
+                    loading="lazy"
+                    src={ProductOfTheDay}
+                    alt=""
+                    className="max-h-26"
+                  />
+                </div>
+                <h1 className="text-5xl md:text-7xl font-extrabold mb-6 text-gray-800 leading-tight">
+                  Building The{" "}
+                  <LineShadowText
+                    className="italic text-green-800"
+                    shadowColor={"black"}
+                  >
+                    FUTURE
+                  </LineShadowText>
+                  <br /> of Precision Farming.
+                </h1>
+                <p className="text-xl md:text-2xl lg:text-3xl text-gray-700 max-w-3xl mx-auto mb-10 leading-relaxed">
+                  We bring smart irrigation, crop health monitoring, and real
+                  time insights together in one system
+                </p>
+                <div
+                  onClick={() => navigate("/home")}
+                  className="w-full flex flex-col justify-center items-center -mb-1 -z-20"
+                >
+                  <ShimmerButton className="rounded-full md:px-14 px-7 py-4 text-base font-mediumm mb-10 bg-green-600">
+                    Get Started Now!
+                  </ShimmerButton>
+                  <UserRatingCard />
+                </div>
+              </div>
+            </>
+          }
+        >
+          {/* This is where you'll add your video */}
+          <div className="flex items-center justify-center h-full w-full">
+            <div className="w-full h-full flex items-center justify-center rounded-2xl">
+              <VideoElement />
+            </div>
+          </div>
+        </ContainerScroll>
       </div>
     </section>
   );

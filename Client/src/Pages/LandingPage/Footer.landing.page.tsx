@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Footer: React.FC = () => {
   const navigate = useNavigate();
   return (
-    <footer className="bg-black text-white px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12">
+    <footer id="endpage" className="bg-black text-white px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12">
       <div className="flex flex-col lg:flex-row justify-between gap-8 md:gap-12">
         {/* Left Section */}
         <div className="lg:flex-1">

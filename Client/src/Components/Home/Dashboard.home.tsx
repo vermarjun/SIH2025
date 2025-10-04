@@ -3,6 +3,7 @@ import {
   HelpCircle,
   Sun, Cloud, CloudRain, AlertTriangle, Info, CheckCircle, Zap, Droplets, Thermometer
 } from "lucide-react";
+import { useState } from "react";
 
 // Mock types since we don't have access to the original types
 interface User {
@@ -58,10 +59,10 @@ const SensorStatus: React.FC<SensorProps> = ({ name, status }) => {
         };
       default:
         return {
-          dotColor: 'bg-gray-400',
-          textColor: 'text-gray-500',
-          bgColor: 'bg-gray-50',
-          borderColor: 'border-gray-100'
+          dotColor: 'bg-red-400',
+          textColor: 'text-red-400',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-100'
         };
     }
   };
@@ -81,16 +82,17 @@ const SensorStatus: React.FC<SensorProps> = ({ name, status }) => {
   );
 };
 
-const SensorStatusHeader: React.FC = () => {
+const SensorStatusHeader = ({ testing }: { testing: boolean }) => {
+  
   const sensors = [
-    { name: 'Sensor Node 1', status: 'Active' as const },
-    { name: 'Sensor Node 2', status: 'Active' as const },
-    { name: 'Sensor Node 3', status: 'Active' as const },
-    { name: 'Sensor Node 4', status: 'Active' as const },
-    { name: 'Hub', status: 'Active' as const },
-    { name: 'Home Router', status: 'Active' as const },
-    { name: 'NPK Sensor', status: 'Calibrating' as const },
-    { name: 'pH Sensor', status: 'Calibrating' as const },
+    { name: 'Sensor Node 1', status: (!testing)?'Inactive':'Active' as const },
+    { name: 'Sensor Node 2', status: (!testing)?'Inactive':'Active' as const },
+    { name: 'Sensor Node 3', status: (!testing)?'Inactive':'Active' as const },
+    { name: 'Sensor Node 4', status: (!testing)?'Inactive':'Active' as const },
+    { name: 'Hub', status: (!testing)?'Inactive':'Active' as const },
+    { name: 'Home Router', status: testing?'Calibrating':'Inactive' as const },
+    { name: 'NPK Sensor', status: testing?'Calibrating':'Inactive' as const },
+    { name: 'pH Sensor', status: testing?'Calibrating':'Inactive' as const },
   ];
 
   return (
@@ -101,6 +103,7 @@ const SensorStatusHeader: React.FC = () => {
           <SensorStatus 
             key={index}
             name={sensor.name}
+            // @ts-ignore
             status={sensor.status}
           />
         ))}
@@ -366,6 +369,7 @@ const DashboardHeader: React.FC = () => {
 
 // @ts-ignore
 const Dashboard = ({ user, onNavigate = () => {} }: Partial<Props>) => {
+  const [testing, ] = useState(true);
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -374,14 +378,21 @@ const Dashboard = ({ user, onNavigate = () => {} }: Partial<Props>) => {
           <h1 className="text-xl sm:text-3xl font-bold text-black text-center">
             Welcome back, <span className="text-green-600">{user?.username}</span>
           </h1>
-          <p className="text-gray-600 mt-1 sm:mt-2 text-center text-sm sm:text-base">Here's what's happening with your farm today</p>
+          <p className={`${testing?"text-gray-600":"text-red-500"} mt-1 sm:mt-2 text-center text-sm sm:text-base`}>
+            {
+              testing?
+              "Sensors are connected, displaying live fetched data from Reciever.":
+              "Sensors are not connected, displaying old Data"
+            }
+            
+          </p>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 space-y-4 sm:space-y-8 pb-6 sm:pb-8">
-        <DashboardHeader />
-        <SensorStatusHeader />
+        <DashboardHeader/>
+        <SensorStatusHeader testing={testing}/>
         <WeatherDashboard />
       </div>
     </div>

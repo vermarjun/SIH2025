@@ -109,7 +109,7 @@ export const Timeline = ({ data }: TimelineProps) => {
   return (
     <div className="w-full font-sans min-h-screen" ref={containerRef}>
       {/* Heading Section */}
-      <div className="w-full flex justify-center items-center pt-16 pb-10 md:pb-16">
+      <div className="w-full flex justify-center items-center pb-10 md:pb-16">
         <div className="text-center">
           <div className="font-bold text-4xl md:text-7xl text-gray-900 mb-4">
             Smart Features
@@ -155,23 +155,50 @@ export const Timeline = ({ data }: TimelineProps) => {
                 </div>
 
                 {/* Single Full Width Image Display */}
+                {/* Image Display - Single on mobile, 2x2 grid on md+ */}
                 {item.mediaSrc && item.mediaSrc.length > 0 && (
-                  <div className="w-full rounded-xl overflow-hidden bg-gray-100 shadow-lg">
-                    <img
-                      ref={(el) => {
-                        if (el) {
-                          imageRefs.current[index] = el;
-                        }
-                      }}
-                      data-src={item.mediaSrc[0]} // Only use the first image
-                      alt={item.alt?.[0] || `${item.title} feature image`}
-                      className="w-full h-64 md:h-96 object-cover opacity-0 transition-all duration-500"
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
-                      }}
-                    />
+                  <div>
+                    {/* Mobile: Single Image */}
+                    <div className="md:hidden w-full rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                      <img
+                        ref={(el) => {
+                          if (el) {
+                            imageRefs.current[index * 4] = el;
+                          }
+                        }}
+                        data-src={item.mediaSrc[0]}
+                        alt={item.alt?.[0] || `${item.title} feature image`}
+                        className="w-full h-64 object-cover opacity-0 transition-all duration-500"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Desktop: 2x2 Grid */}
+                    <div className="hidden md:grid grid-cols-2 gap-4">
+                      {item.mediaSrc.slice(0, 4).map((src, imgIndex) => (
+                        <div key={imgIndex} className="rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                          <img
+                            ref={(el) => {
+                              if (el) {
+                                imageRefs.current[index * 4 + imgIndex] = el;
+                              }
+                            }}
+                            data-src={src}
+                            alt={item.alt?.[imgIndex] || `${item.title} feature image ${imgIndex + 1}`}
+                            className="w-full h-64 object-cover opacity-0 transition-all duration-500"
+                            loading="lazy"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>

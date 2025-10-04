@@ -3,17 +3,17 @@ import { cn } from "@/lib/utils";
 
 const images = [
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.41_tarcwt.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484207/WhatsApp_Image_2025-09-22_at_00.30.40_kdvh2h.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616765/WhatsApp_Image_2025-09-27_at_23.54.40_ao7w4d.jpg",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616677/WhatsApp_Image_2025-09-27_at_23.25.20_cettol.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616222/WhatsApp_Image_2025-09-27_at_23.08.39_sfi5li.jpg",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642702/IMG-20250201-WA0047_wlaizu.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642697/IMG_8561_ppxlul.jpg",
+  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616231/20250928_185730_r8mlp1.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759615748/WhatsApp_Image_2025-09-24_at_08.31.42_trxk5k.jpg",
   "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758643986/Soil-NPK-Sensor-with-arduino-and-oled-display-display-nitrogen-phosphorus-and-potassium-on-oled-display-copy_aydwxk.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758644208/1_GV3v-fXxrJbRbPpNZ_rF7A_ijrwsz.png",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758484202/WhatsApp_Image_2025-09-22_at_00.30.43_owefui.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0018_ynr7pd.jpg",
-  "https://res.cloudinary.com/dkzeey5iq/image/upload/v1758642682/IMG-20250201-WA0016_hzrogq.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616939/WhatsApp_Image_2025-09-28_at_00.07.26_jks0th.jpg",
+  "https://res.cloudinary.com/dloh4tkp5/image/upload/v1759616229/20250928_185715_rokos1.jpg",
 ];
 
 const firstRow = images.slice(0, 4);
@@ -25,7 +25,7 @@ const ImageCard = ({ img }: { img: string }) => {
     <figure
       className={cn(
         "relative aspect-[16/9] w-60 md:w-80 cursor-pointer overflow-hidden rounded-xl border-2",
-        "border-green-100 bg-white hover:bg-green-50 transition-all duration-300 shadow-sm hover:shadow-md hover:border-green-300"
+        "border-white/80 bg-green-100 hover:bg-white/10 transition-all duration-300 shadow-sm hover:shadow-md hover:border-green-50"
       )}
     >
       <img
@@ -130,6 +130,8 @@ function Marquee({
 
 export function ProductVideos() {
   return (
+    <section id="gallery">
+
     <div className="relative flex h-fit flex-col items-center justify-center overflow-hidden bg-white">
       <div className="w-full flex justify-center items-center pb-6"> {/* Reduced padding from pb-8 to pb-6 */}
         <div className="text-center">
@@ -145,8 +147,8 @@ export function ProductVideos() {
         @keyframes marquee {
           from { transform: translateX(0); }
           to { transform: translateX(calc(-100% - 0.5rem)); } /* Reduced gap from 1rem to 0.5rem */
-        }
-      `}</style>
+          }
+          `}</style>
 
       <Marquee className="[--duration:20s] mb-2"> {/* Reduced margin from mb-4 to mb-2 */}
         {firstRow.map((item, index) => {
@@ -178,6 +180,7 @@ export function ProductVideos() {
         })}
       </Marquee>
     </div>
+        </section>
   );
 }
 

@@ -18,7 +18,7 @@ export function Map() {
 
 export function FeedbackForm() {
   return (
-    <div className="w-full h-full">
+    <div id="contact" className="w-full h-full">
       <div className="mb-8">
         <h2 className="text-3xl md:text-4xl font-light text-neutral-900 mb-2">Feedback</h2>
         <p className="text-neutral-600 text-base md:text-lg">We value your suggestions</p>

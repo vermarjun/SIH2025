@@ -17,12 +17,10 @@ const GlassyNavbar = () => {
 
   const navItems = [
     { label: 'Home', href: 'home' },
-    { label: 'About', href: 'features' },
-    { label: 'Gallery', href: 'features' },
-    { label: 'Impact', href: 'features' },
     { label: 'Features', href: 'features' },
-    { label: 'Example', href: 'examples' },
-    { label: 'Contact', href: 'endpagecta' },
+    { label: 'Gallery', href: 'gallery' },
+    { label: 'Reach Us', href: 'contact' },
+    { label: 'Socials', href: 'endpage' },
   ];
 
   const scrollToSection = (id: string) => {

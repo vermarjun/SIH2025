@@ -195,7 +195,7 @@ const AuthPage: React.FC = () => {
   );
 
   return (
-    <div className="bg-black w-screen h-screen flex justify-center items-center z-10 relative overflow-hidden">
+    <div className="bg-black w-screen min-h-screen flex justify-center items-center z-10 relative overflow-hidden py-4"> {/* Added min-h-screen and py-4 */}
       {/* Background subtle pattern */}
       <div className="w-full h-full absolute inset-0 z-0">
         <FlickeringGrid
@@ -209,15 +209,15 @@ const AuthPage: React.FC = () => {
       </div>
 
       {/* Main auth card */}
-      <div className="relative w-full max-w-sm z-10 px-4"> {/* Changed from max-w-md to max-w-sm */}
-        <div className={`relative transition-all duration-500 ease-out ${
+      <div className="relative w-full max-w-sm z-10 px-4 h-full flex items-center justify-center"> {/* Added flex centering */}
+        <div className={`relative transition-all duration-500 ease-out w-full ${
           isAnimating ? 'scale-105' : 'scale-100'
         }`}>
-          {/* Card */}
-          <div className="relative bg-gray-950 border border-gray-800 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50 overflow-hidden"> {/* Reduced padding */}
+          {/* Card with responsive height */}
+          <div className="relative bg-gray-950 border border-gray-800 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50 overflow-y-auto max-h-[90vh]"> {/* Added max-h-[90vh] and overflow-y-auto */}
             {/* Header */}
-            <div className="text-center mb-5 md:mb-6"> {/* Reduced margin */}
-              <h1 className="text-xl md:text-2xl font-semibold text-white mb-1 tracking-tight"> {/* Smaller text on mobile */}
+            <div className="text-center mb-4 md:mb-5"> {/* Reduced margin */}
+              <h1 className="text-lg md:text-2xl font-semibold text-white mb-1 tracking-tight"> {/* Smaller base text */}
                 {isLogin ? 'Welcome back' : 'Create your account'}
               </h1>
               <p className="text-gray-400 text-xs md:text-sm font-light"> {/* Smaller text */}
@@ -226,7 +226,7 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Auth mode toggle */}
-            <div className="relative mb-5 md:mb-6"> {/* Reduced margin */}
+            <div className="relative mb-4 md:mb-5"> {/* Reduced margin */}
               <div className="bg-gray-900 rounded-xl p-1 flex relative border border-gray-800">
                 <div
                   className={`absolute top-1 bottom-1 w-1/2 bg-white rounded-lg transition-all duration-300 ease-out ${
@@ -261,15 +261,15 @@ const AuthPage: React.FC = () => {
             {/* Google Auth Button */}
             <button 
               type="button"
-              className="w-full mb-4 md:mb-5 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:border-gray-700 group font-medium text-sm md:text-base"> {/* Reduced padding and gap */}
+              className="w-full mb-3 md:mb-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:border-gray-700 group font-medium text-sm md:text-base"> {/* Reduced margin */}
               <GoogleIcon />
               <span>Continue with Google</span>
             </button>
 
             {/* Improved divider */}
-            <div className="relative my-4 md:my-5 flex items-center"> {/* Reduced margin */}
+            <div className="relative my-3 md:my-4 flex items-center"> {/* Reduced margin */}
               <div className="flex-grow border-t border-gray-800" />
-              <div className="relative flex-shrink-0 px-3"> {/* Reduced padding */}
+              <div className="relative flex-shrink-0 px-2"> {/* Reduced padding */}
                 <div className="bg-black px-2 py-1 rounded-full border border-gray-800"> {/* Reduced padding */}
                   <span className="text-xs text-gray-500 font-light tracking-wide">OR</span>
                 </div>
@@ -299,8 +299,8 @@ const AuthPage: React.FC = () => {
               <div ref={formRef} className="space-y-3 md:space-y-4"> {/* Reduced spacing */}
                 {/* Name field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
-                }`}>
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
+                }`}> {/* Reduced max-h */}
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"> {/* Reduced padding */}
                       <User2Icon className="h-4 w-4 text-gray-500" />
@@ -310,7 +310,7 @@ const AuthPage: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm" /* Reduced padding and text size */
+                      className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm" /* Reduced padding */
                       placeholder="Full name"
                     />
                   </div>
@@ -318,8 +318,8 @@ const AuthPage: React.FC = () => {
 
                 {/* Router ID field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
-                }`}>
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
+                }`}> {/* Reduced max-h */}
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <User2Icon className="h-4 w-4 text-gray-500" />
@@ -329,7 +329,7 @@ const AuthPage: React.FC = () => {
                       name="routerId"
                       value={formData.routerId}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                      className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                       placeholder="Router Id from home router"
                     />
                   </div>
@@ -345,7 +345,7 @@ const AuthPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                    className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                     placeholder="Email address"
                     required
                   />
@@ -361,7 +361,7 @@ const AuthPage: React.FC = () => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-11 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                    className="w-full pl-10 pr-11 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                     placeholder="Password"
                     required
                   />
@@ -376,8 +376,8 @@ const AuthPage: React.FC = () => {
 
                 {/* Confirm Password field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-16 opacity-100 translate-y-0'
-                }`}>
+                  isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
+                }`}> {/* Reduced max-h */}
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <Lock className="h-4 w-4 text-gray-500" />
@@ -387,7 +387,7 @@ const AuthPage: React.FC = () => {
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-11 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                      className="w-full pl-10 pr-11 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
                       placeholder="Confirm password"
                     />
                     <button
@@ -402,9 +402,9 @@ const AuthPage: React.FC = () => {
 
                 {/* Login options */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
-                  !isLogin ? 'max-h-0 opacity-0' : 'max-h-16 opacity-100'
-                }`}>
-                  <div className="flex items-center justify-between text-xs pt-2"> {/* Smaller text */}
+                  !isLogin ? 'max-h-0 opacity-0' : 'max-h-14 opacity-100'
+                }`}> {/* Reduced max-h */}
+                  <div className="flex items-center justify-between text-xs pt-1"> {/* Smaller text and padding */}
                     <label className="flex items-center text-gray-400 cursor-pointer group">
                       <input 
                         type="checkbox" 
@@ -422,7 +422,7 @@ const AuthPage: React.FC = () => {
                 </div>
 
                 {/* Submit Button */}
-                <div className="pt-4 md:pt-5"> {/* Reduced padding */}
+                <div className="pt-3 md:pt-4"> {/* Reduced padding */}
                   <button
                     type="button"
                     onClick={handleSubmit}
@@ -447,7 +447,7 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <div className="mt-5 md:mt-6 text-center text-xs md:text-sm text-gray-500"> {/* Reduced margin and text size */}
+            <div className="mt-4 md:mt-5 text-center text-xs md:text-sm text-gray-500"> {/* Reduced margin */}
               <span>
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
