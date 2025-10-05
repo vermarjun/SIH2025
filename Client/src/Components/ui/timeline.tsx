@@ -21,13 +21,13 @@ export const Timeline = ({ data }: TimelineProps) => {
   // Use ResizeObserver for efficient height tracking
   useEffect(() => {
     if (!ref.current) return;
-    
+
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
         setHeight(entry.contentRect.height);
       }
     });
-    
+
     resizeObserver.observe(ref.current);
     return () => resizeObserver.disconnect();
   }, [data]);
@@ -36,21 +36,21 @@ export const Timeline = ({ data }: TimelineProps) => {
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
-      
+
       const container = containerRef.current;
       const containerRect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       // Calculate progress based on container position relative to viewport center
       const containerTop = containerRect.top;
       const containerHeight = containerRect.height;
       const viewportCenter = windowHeight / 2;
-      
+
       // Progress starts when container top reaches viewport center
       // Progress completes when container bottom reaches viewport center
       const startPoint = containerTop - viewportCenter;
       const endPoint = containerTop + containerHeight - viewportCenter;
-      
+
       let progress;
       if (startPoint > 0) {
         // Container hasn't reached center yet
@@ -60,22 +60,22 @@ export const Timeline = ({ data }: TimelineProps) => {
         progress = 1;
       } else {
         // Container is crossing the center - calculate progress
-        progress = Math.abs(startPoint) / (containerHeight);
+        progress = Math.abs(startPoint) / containerHeight;
       }
-      
+
       progress = Math.min(1, Math.max(0, progress));
       setScrollProgress(progress);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll, { passive: true });
+
     // Initial calculation
     handleScroll();
-    
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
@@ -87,12 +87,12 @@ export const Timeline = ({ data }: TimelineProps) => {
           const image = entry.target as HTMLImageElement;
           if (entry.isIntersecting && !image.src && image.dataset.src) {
             image.src = image.dataset.src;
-            image.classList.remove('opacity-0');
-            image.classList.add('opacity-100');
+            image.classList.remove("opacity-0");
+            image.classList.add("opacity-100");
           }
         });
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: "50px" }
     );
 
     imageRefs.current.forEach((image) => {
@@ -115,7 +115,8 @@ export const Timeline = ({ data }: TimelineProps) => {
             Smart Features
           </div>
           <p className="text-md md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Revolutionizing agriculture with AI-powered solutions for sustainable farming
+            Revolutionizing agriculture with AI-powered solutions for
+            sustainable farming
           </p>
         </div>
       </div>
@@ -127,10 +128,7 @@ export const Timeline = ({ data }: TimelineProps) => {
           className="relative max-w-7xl mx-auto flex flex-col gap-12 md:gap-24"
         >
           {data.map((item, index) => (
-            <div
-              key={index}
-              className="flex justify-start md:gap-12 relative"
-            >
+            <div key={index} className="flex justify-start md:gap-12 relative">
               {/* Timeline Node */}
               <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
                 <div className="h-12 absolute left-3 md:left-3 w-12 rounded-full bg-white shadow-md border border-gray-200 flex items-center justify-center">
@@ -159,28 +157,31 @@ export const Timeline = ({ data }: TimelineProps) => {
                 {item.mediaSrc && item.mediaSrc.length > 0 && (
                   <div>
                     {/* Mobile: Single Image */}
-                    <div className="md:hidden w-full rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                    <div className="flex md:hidden w-full rounded-xl overflow-hidden bg-gray-100 shadow-lg">
                       <img
                         ref={(el) => {
                           if (el) {
                             imageRefs.current[index * 4] = el;
                           }
                         }}
-                        data-src={item.mediaSrc[0]}
+                        src={item.mediaSrc[0]}
                         alt={item.alt?.[0] || `${item.title} feature image`}
-                        className="w-full h-64 object-cover opacity-0 transition-all duration-500"
-                        loading="lazy"
+                        className="w-full h-64 object-contain transition-all duration-500 hover:scale-3d"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
+                          target.src =
+                            "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
                         }}
                       />
                     </div>
-                    
+
                     {/* Desktop: 2x2 Grid */}
                     <div className="hidden md:grid grid-cols-2 gap-4">
                       {item.mediaSrc.slice(0, 4).map((src, imgIndex) => (
-                        <div key={imgIndex} className="rounded-xl overflow-hidden bg-gray-100 shadow-lg">
+                        <div
+                          key={imgIndex}
+                          className="rounded-xl overflow-hidden bg-gray-100 shadow-lg"
+                        >
                           <img
                             ref={(el) => {
                               if (el) {
@@ -188,12 +189,16 @@ export const Timeline = ({ data }: TimelineProps) => {
                               }
                             }}
                             data-src={src}
-                            alt={item.alt?.[imgIndex] || `${item.title} feature image ${imgIndex + 1}`}
-                            className="w-full h-64 object-cover opacity-0 transition-all duration-500"
+                            alt={
+                              item.alt?.[imgIndex] ||
+                              `${item.title} feature image ${imgIndex + 1}`
+                            }
+                            className="w-full h-64 object-center opacity-0 transition-all duration-500 hover:scale-110"
                             loading="lazy"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
-                              target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
+                              target.src =
+                                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23f8fafc'/%3E%3Ctext x='400' y='200' font-family='Arial, sans-serif' font-size='16' fill='%236b7280' text-anchor='middle' dy='.3em'%3EImage not available%3C/text%3E%3C/svg%3E";
                             }}
                           />
                         </div>

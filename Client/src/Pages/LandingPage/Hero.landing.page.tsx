@@ -209,7 +209,7 @@ const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
 
   return (
     <div
-      className={`md:flex md:bg-white/10 md:backdrop-blur-xl md:p-2 md:rounded-full items-center gap-2 rounded-lg mb-6 ${className}`}
+      className={`md:flex md:bg-white/10 md:backdrop-blur-3xl md:p-2 md:rounded-full items-center gap-2 rounded-lg md:mb-6 ${className}`}
     >
       {/* Overlapping Avatars */}
       <div className="flex -space-x-4">
@@ -234,7 +234,7 @@ const UserRatingCard: React.FC<UserRatingCardProps> = ({ className = "" }) => {
         <div className="flex ">{renderStars()}</div>
 
         {/* User count text */}
-        <p className="text-gray-300 text-xs font-medium text-left">
+        <p className="text-gray-100 text-xs font-medium text-left">
           10+ Active users
         </p>
       </div>

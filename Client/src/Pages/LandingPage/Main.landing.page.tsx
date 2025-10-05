@@ -26,42 +26,21 @@ const LoadingFallback: React.FC<{ height?: string }> = ({
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen overflow-hidden">
+    <div className="">
       <div className="absolute w-screen">
         <GlassyNavbar />
       </div>
-
       <Hero />
-      <BottomSection/>
       <LazyWrapper fallback={<LoadingFallback />}>
         <Suspense fallback={<LoadingFallback />}>
-          <Features />
+          <BottomSection/>
         </Suspense>
       </LazyWrapper>
-
-      <LazyWrapper fallback={<LoadingFallback />}>
-        <Suspense fallback={<LoadingFallback />}>
-          <Testimonials />
-        </Suspense>
-      </LazyWrapper>
-
-      <LazyWrapper fallback={<LoadingFallback />}>
-        <Suspense fallback={<LoadingFallback />}>
-          <LocationComponent />
-        </Suspense>
-      </LazyWrapper>
-
-      <LazyWrapper fallback={<LoadingFallback />}>
-        <Suspense fallback={<LoadingFallback />}>
-          <EndPageCTA />
-        </Suspense>
-      </LazyWrapper>
-
-      <LazyWrapper fallback={<LoadingFallback height="h-32" />}>
-        <Suspense fallback={<LoadingFallback height="h-32" />}>
-          <Footer />
-        </Suspense>
-      </LazyWrapper>
+      <Features />
+      <Testimonials />
+      <LocationComponent />
+      <EndPageCTA />
+      <Footer />
     </div>
   );
 };

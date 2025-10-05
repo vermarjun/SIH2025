@@ -1,6 +1,21 @@
 import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
 import { Button } from "@/Components/ui/button";
+import LazyWrapper from "./LazyWrapper.landing.page";
+import { Suspense } from "react";
+
+// Loading fallback component
+const LoadingFallback: React.FC<{ height?: string }> = ({
+  height = "h-64",
+}) => (
+  <div className={`${height} flex items-center justify-center`}>
+    <div className="animate-pulse flex space-x-4">
+      <div className="rounded-full bg-gray-800 h-4 w-4"></div>
+      <div className="rounded-full bg-gray-800 h-4 w-4"></div>
+      <div className="rounded-full bg-gray-800 h-4 w-4"></div>
+    </div>
+  </div>
+);
 
 export function Map() {
   return (
@@ -78,11 +93,19 @@ export default function Location() {
         
         <div className="flex flex-col md:flex-row justify-center items-stretch w-full h-fit gap-8 md:gap-12">
           <div className="w-full md:w-1/2 h-full">
-            <Map/>
+            <LazyWrapper fallback={<LoadingFallback />}>
+              <Suspense fallback={<LoadingFallback />}>
+                <Map/>
+              </Suspense>
+            </LazyWrapper>
           </div>
           
           <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-start bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-neutral-100">
-            <FeedbackForm/>
+             <LazyWrapper fallback={<LoadingFallback />}>
+              <Suspense fallback={<LoadingFallback />}>
+                <FeedbackForm/>
+              </Suspense>
+            </LazyWrapper>
           </div>
         </div>
         
