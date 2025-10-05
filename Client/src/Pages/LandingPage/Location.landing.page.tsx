@@ -101,11 +101,7 @@ export default function Location() {
           </div>
           
           <div className="w-full md:w-1/2 h-full flex flex-col justify-center items-start bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-neutral-100">
-             <LazyWrapper fallback={<LoadingFallback />}>
-              <Suspense fallback={<LoadingFallback />}>
-                <FeedbackForm/>
-              </Suspense>
-            </LazyWrapper>
+              <FeedbackForm/>
           </div>
         </div>
         
