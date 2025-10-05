@@ -98,7 +98,7 @@ const AuthPage: React.FC = () => {
         size: Math.random() * 3 + 1.5, // Slightly smaller particles
         opacity: Math.random() * 0.6 + 0.4,
         delay: Math.random() * 200,
-        color: Math.random() > 0.7 ? '#3b82f6' : '#ffffff',
+        color: Math.random() > 0.7 ? '#16a34a' : '#d1fae5',
         rotation: Math.random() * 360,
         rotationSpeed: (Math.random() - 0.5) * 10
       });
@@ -195,51 +195,47 @@ const AuthPage: React.FC = () => {
   );
 
   return (
-    <div className="bg-black w-screen min-h-screen flex justify-center items-center z-10 relative overflow-hidden py-4"> {/* Added min-h-screen and py-4 */}
+    <>
+    <div className="bg-white w-screen min-h-screen flex justify-center items-center z-10 relative overflow-hidden py-4"> {/* Changed to white background */}
       {/* Background subtle pattern */}
       <div className="w-full h-full absolute inset-0 z-0">
         <FlickeringGrid
           className="relative inset-0 z-0 [mask-image:radial-gradient(650px_circle_at_center,white,transparent)]"
           squareSize={4}
           gridGap={6}
-          color="#60A5FA"
-          maxOpacity={0.5}
+          color="green" 
+          maxOpacity={0.3} 
           flickerChance={0.1}
         />
       </div>
 
-      {/* Main auth card */}
-      <div className="relative w-full max-w-sm z-10 px-4 h-full flex items-center justify-center"> {/* Added flex centering */}
+      <div className="relative w-full max-w-sm z-10 px-4 h-full flex items-center justify-center">
         <div className={`relative transition-all duration-500 ease-out w-full ${
           isAnimating ? 'scale-105' : 'scale-100'
         }`}>
-          {/* Card with responsive height */}
-          <div className="relative bg-gray-950 border border-gray-800 rounded-2xl p-5 md:p-6 shadow-2xl shadow-black/50 overflow-y-auto max-h-[90vh]"> {/* Added max-h-[90vh] and overflow-y-auto */}
-            {/* Header */}
-            <div className="text-center mb-4 md:mb-5"> {/* Reduced margin */}
-              <h1 className="text-lg md:text-2xl font-semibold text-white mb-1 tracking-tight"> {/* Smaller base text */}
+          <div className="relative bg-white border border-gray-200 rounded-2xl p-5 md:p-6 shadow-2xl shadow-gray-200/50 overflow-y-auto max-h-[90vh]">
+            <div className="text-center mb-4 md:mb-5">
+              <h1 className="text-lg md:text-2xl font-semibold text-gray-900 mb-1 tracking-tight"> 
                 {isLogin ? 'Welcome back' : 'Create your account'}
               </h1>
-              <p className="text-gray-400 text-xs md:text-sm font-light"> {/* Smaller text */}
+              <p className="text-gray-600 text-xs md:text-sm font-light"> 
                 {isLogin ? 'Sign in to continue to your account' : 'Get started with your free account'}
               </p>
             </div>
-
-            {/* Auth mode toggle */}
-            <div className="relative mb-4 md:mb-5"> {/* Reduced margin */}
-              <div className="bg-gray-900 rounded-xl p-1 flex relative border border-gray-800">
+            <div className="relative mb-4 md:mb-5">
+              <div className="bg-gray-100 rounded-xl p-1 flex relative border border-gray-200"> 
                 <div
-                  className={`absolute top-1 bottom-1 w-1/2 bg-white rounded-lg transition-all duration-300 ease-out ${
+                  className={`absolute top-1 bottom-1 w-1/2 bg-green-600 rounded-lg transition-all duration-300 ease-out ${
                     isLogin ? 'translate-x-0' : 'translate-x-full'
-                  }`}
+                  }`} 
                 />
                 <button
                   type="button"
                   onClick={() => !isLogin && toggleAuthMode()}
                   className={`relative z-10 flex-1 py-2 px-3 text-xs md:text-sm font-medium rounded-lg transition-all duration-300 ${
                     isLogin 
-                      ? 'text-black' 
-                      : 'text-gray-400 hover:text-gray-200'
+                      ? 'text-white' 
+                      : 'text-gray-600 hover:text-gray-900' 
                   }`}
                 >
                   Sign In
@@ -249,8 +245,8 @@ const AuthPage: React.FC = () => {
                   onClick={() => isLogin && toggleAuthMode()}
                   className={`relative z-10 flex-1 py-2 px-3 text-xs md:text-sm font-medium rounded-lg transition-all duration-300 ${
                     !isLogin 
-                      ? 'text-black' 
-                      : 'text-gray-400 hover:text-gray-200'
+                      ? 'text-white'
+                      : 'text-gray-600 hover:text-gray-900' 
                   }`}
                 >
                   Sign Up
@@ -261,20 +257,20 @@ const AuthPage: React.FC = () => {
             {/* Google Auth Button */}
             <button 
               type="button"
-              className="w-full mb-3 md:mb-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:border-gray-700 group font-medium text-sm md:text-base"> {/* Reduced margin */}
+              className="w-full mb-3 md:mb-4 bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 md:gap-3 transition-all duration-300 hover:border-gray-400 group font-medium text-sm md:text-base"> {/* Changed to light theme */}
               <GoogleIcon />
               <span>Continue with Google</span>
             </button>
 
             {/* Improved divider */}
-            <div className="relative my-3 md:my-4 flex items-center"> {/* Reduced margin */}
-              <div className="flex-grow border-t border-gray-800" />
-              <div className="relative flex-shrink-0 px-2"> {/* Reduced padding */}
-                <div className="bg-black px-2 py-1 rounded-full border border-gray-800"> {/* Reduced padding */}
-                  <span className="text-xs text-gray-500 font-light tracking-wide">OR</span>
+            <div className="relative my-3 md:my-4 flex items-center">
+              <div className="flex-grow border-t border-gray-300" /> {/* Changed to lighter border */}
+              <div className="relative flex-shrink-0 px-2">
+                <div className="bg-white px-2 py-1 rounded-full border border-gray-300"> {/* Changed to white background and light border */}
+                  <span className="text-xs text-gray-500 font-light tracking-wide">OR</span> {/* Kept gray text */}
                 </div>
               </div>
-              <div className="flex-grow border-t border-gray-800" />
+              <div className="flex-grow border-t border-gray-300" /> {/* Changed to lighter border */}
             </div>
 
             {/* Form Container */}
@@ -296,21 +292,21 @@ const AuthPage: React.FC = () => {
                 />
               ))}
               
-              <div ref={formRef} className="space-y-3 md:space-y-4"> {/* Reduced spacing */}
+              <div ref={formRef} className="space-y-3 md:space-y-4">
                 {/* Name field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
                   isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
-                }`}> {/* Reduced max-h */}
+                }`}>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"> {/* Reduced padding */}
-                      <User2Icon className="h-4 w-4 text-gray-500" />
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <User2Icon className="h-4 w-4 text-gray-500" /> {/* Kept gray icon */}
                     </div>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm" /* Reduced padding */
+                      className="w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 font-light text-sm" 
                       placeholder="Full name"
                     />
                   </div>
@@ -319,23 +315,22 @@ const AuthPage: React.FC = () => {
                 {/* Router ID field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
                   isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
-                }`}> {/* Reduced max-h */}
+                }`}>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User2Icon className="h-4 w-4 text-gray-500" />
+                      <User2Icon className="h-4 w-4 text-gray-500" /> {/* Kept gray icon */}
                     </div>
                     <input
                       type="text"
                       name="routerId"
                       value={formData.routerId}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                      className="w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 font-light text-sm" 
                       placeholder="Router Id from home router"
                     />
                   </div>
                 </div>
 
-                {/* Email field */}
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail className="h-4 w-4 text-gray-500" />
@@ -345,94 +340,90 @@ const AuthPage: React.FC = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-3 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                    className="w-full pl-10 pr-3 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 font-light text-sm" 
                     placeholder="Email address"
                     required
                   />
                 </div>
 
-                {/* Password field */}
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Lock className="h-4 w-4 text-gray-500" />
+                    <Lock className="h-4 w-4 text-gray-500" /> 
                   </div>
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-11 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                    className="w-full pl-10 pr-11 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 font-light text-sm" 
                     placeholder="Password"
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-300" 
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 </div>
 
-                {/* Confirm Password field */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
                   isLogin ? 'max-h-0 opacity-0 -translate-y-2' : 'max-h-14 opacity-100 translate-y-0'
-                }`}> {/* Reduced max-h */}
+                }`}>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Lock className="h-4 w-4 text-gray-500" />
+                      <Lock className="h-4 w-4 text-gray-500" /> 
                     </div>
                     <input
                       type={showConfirmPassword ? 'text' : 'password'}
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-11 py-2 bg-gray-900 border border-gray-800 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 font-light text-sm"
+                      className="w-full pl-10 pr-11 py-2 bg-gray-50 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500/20 transition-all duration-300 font-light text-sm" 
                       placeholder="Confirm password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors duration-300"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors duration-300"
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
                   </div>
                 </div>
 
-                {/* Login options */}
                 <div className={`transition-all duration-400 ease-in-out overflow-hidden ${
                   !isLogin ? 'max-h-0 opacity-0' : 'max-h-14 opacity-100'
-                }`}> {/* Reduced max-h */}
-                  <div className="flex items-center justify-between text-xs pt-1"> {/* Smaller text and padding */}
-                    <label className="flex items-center text-gray-400 cursor-pointer group">
+                }`}>
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <label className="flex items-center text-gray-600 cursor-pointer group"> 
                       <input 
                         type="checkbox" 
-                        className="mr-2 rounded border-gray-700 bg-gray-900 text-blue-500 focus:ring-blue-500 focus:ring-1 transition-all duration-200" 
+                        className="mr-2 rounded border-gray-400 bg-white text-green-600 focus:ring-green-500 focus:ring-1 transition-all duration-200" 
                       />
-                      <span className="group-hover:text-gray-300 transition-colors duration-200 font-light">Remember me</span>
+                      <span className="group-hover:text-gray-800 transition-colors duration-200 font-light">Remember me</span> 
                     </label>
                     <button 
                       type="button" 
-                      className="text-blue-400 hover:text-blue-300 transition-colors duration-300 font-light"
+                      className="text-green-600 hover:text-green-700 transition-colors duration-300 font-light" 
                     >
                       Forgot password?
                     </button>
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <div className="pt-3 md:pt-4"> {/* Reduced padding */}
+                <div className="pt-3 md:pt-4">
                   <button
                     type="button"
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="w-full bg-white hover:bg-gray-100 text-black font-medium py-2.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-white/20 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm" /* Reduced padding and text size */
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-xl transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-green-500/20 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm" 
                   >
                     <span className="flex items-center justify-center gap-2">
                       {isLoading ? (
                         <div className="flex items-center justify-center">
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black"></div> {/* Smaller spinner */}
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div> 
                         </div>
                       ) : (
                         <>
@@ -447,14 +438,14 @@ const AuthPage: React.FC = () => {
             </div>
 
             {/* Footer */}
-            <div className="mt-4 md:mt-5 text-center text-xs md:text-sm text-gray-500"> {/* Reduced margin */}
+            <div className="mt-4 md:mt-5 text-center text-xs md:text-sm text-gray-600"> {/* Changed to medium gray */}
               <span>
                 {isLogin ? "Don't have an account? " : "Already have an account? "}
               </span>
               <button
                 type="button"
                 onClick={toggleAuthMode}
-                className="text-white hover:text-gray-300 transition-colors duration-300 font-medium"
+                className="text-green-600 hover:text-green-700 transition-colors duration-300 font-medium"
               >
                 {isLogin ? 'Sign up' : 'Sign in'}
               </button>
@@ -476,6 +467,8 @@ const AuthPage: React.FC = () => {
         }
       `}</style>
     </div>
+
+    </>
   );
 };
 
